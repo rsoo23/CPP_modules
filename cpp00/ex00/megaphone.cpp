@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 18:10:58 by rsoo              #+#    #+#             */
-/*   Updated: 2023/07/08 18:41:13 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/07 21:49:48 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 newline: 
 std::cout << "Hello world\n"; or
 std::cout << "Hello world" << endl;
+
+cout: console output
+cin: console input
 */
 
 int main(int ac, char **av)
@@ -26,10 +29,14 @@ int main(int ac, char **av)
 	int	j;
 
 	i = 0;
-	j = -1;
-	while (++i < ac - 1)
+	if (ac == 1)
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+	while (++i < ac)
+	{
+		j = -1;
 		while (av[i][++j])
-			std::cout << toupper(av[i][j]);
+			std::cout << (char)toupper(av[i][j]);
+	}
 	std::cout << std::endl;
 	return 0;
 }
