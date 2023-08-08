@@ -6,14 +6,14 @@
 #    By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 21:52:24 by rsoo              #+#    #+#              #
-#    Updated: 2023/08/07 22:04:42 by rsoo             ###   ########.fr        #
+#    Updated: 2023/08/08 22:30:42 by rsoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = phonebook
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-CPP_FILES = phonebook.cpp
+CPP_FILES = main.cpp PhoneBook.cpp Contact.cpp 
 RM = rm -rf
 
 all: $(NAME)

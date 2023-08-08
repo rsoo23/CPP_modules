@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 21:58:14 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/07 21:58:14 by rsoo             ###   ########.fr       */
+/*   Created: 2023/08/08 22:10:55 by rsoo              #+#    #+#             */
+/*   Updated: 2023/08/08 22:10:55 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-class PhoneBook {
+class Contact {
     public:
-        PhoneBook();
-        ~PhoneBook();
-        void    InitPhoneBook();
-        void    Add();
-        void    Search();
+        Contact();
+        ~Contact();
+        void    setIndex(int index);
+        void    setInfo();
 
     private:
-        Contact contactArr[8];
+        int         index;
+        std::string firstName;
+        std::string lastName;
+        std::string nickname;
+        std::string phoneNumber;
+        std::string darkestSecret;
 }

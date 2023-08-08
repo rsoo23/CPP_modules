@@ -11,24 +11,23 @@
 /* ************************************************************************** */
 
 #include "phonebook.hpp"
-#include <string.h>
 
-int main(void)
-{
-    string      input;
-    PhoneBook   MyPhoneBook;
-
-    input = "";
-    while (input != "EXIT")
-    {
-        std::cout << "Please enter one: ADD | SEARCH | EXIT" << std::endl;
-        std::cin >> input;
-        if (input == "ADD")
-            MyPhoneBook.Add();
-        else if (input == "SEARCH")
-            MyPhoneBook.Search();
+PhoneBook::InitPhoneBook() {
+    for (int i = 0; i < 8; i++) {
+        this->contactArr[i] = Contact();
     }
 }
 
-// ADD
-// Please enter: 
+PhoneBook::Add() {
+    static int  index;
+
+    this->contactArr[index % 8].setIndex(index % 8);
+    this->contactArr[index % 8].setInfo();
+    index++;
+}
+
+PhoneBook::Search() {
+    std::cout << "---------------------------------------------" << std::endl;
+    std::cout << "|Index     |First Name|Last Name |Nickname  |";
+    std::cout << "---------------------------------------------" << std::endl;
+}
