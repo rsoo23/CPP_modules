@@ -12,32 +12,39 @@
 
 #include "Contact.hpp"
 
-Contact::setIndex(int index) {
+Contact::Contact() {};
+Contact::~Contact() {};
+
+void	Contact::setIndex(int index) {
     this->index = index;
 }
 
-Contact::setInfo() {
+void	Contact::setInfo() {
     std::string temp;
 
-    std::cout << "Please enter your" << std::endl;
+    std::cout << "\e[0;32mPlease enter your:\e[0m" << std::endl;
 
-    std::cout << "First Name:"
+    std::cout << "	First Name: ";
     std::cin >> temp;
     this->firstName = temp;
 
-    std::cout << "Last Name:"
+    std::cout << "	Last Name: ";
     std::cin >> temp;
     this->lastName = temp;
 
-    std::cout << "Nickname:"
+    std::cout << "	Nickname: ";
     std::cin >> temp;
     this->nickname = temp;
 
-    std::cout << "Phone Number:"
+    std::cout << "	Phone Number: ";
     std::cin >> temp;
     this->phoneNumber= temp;
 
-    std::cout << "Darkest Secret:"
+    std::cout << "	Darkest Secret: ";
     std::cin >> temp;
     this->darkestSecret = temp;
+}
+
+void	Contact::printContactRow() {
+	
 }

@@ -10,12 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
+#include <iostream>
+#include <string>
+
 class Contact {
     public:
         Contact();
         ~Contact();
         void    setIndex(int index);
         void    setInfo();
+		void	printContactRow();
+		void	trimString();
 
     private:
         int         index;
@@ -24,4 +32,6 @@ class Contact {
         std::string nickname;
         std::string phoneNumber;
         std::string darkestSecret;
-}
+};
+
+#endif

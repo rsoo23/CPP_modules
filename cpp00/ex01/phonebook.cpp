@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
+#include "Contact.hpp"
 
-PhoneBook::InitPhoneBook() {
+PhoneBook::PhoneBook() {};
+PhoneBook::~PhoneBook() {};
+
+void	PhoneBook::InitPhoneBook() {
     for (int i = 0; i < 8; i++) {
         this->contactArr[i] = Contact();
     }
 }
 
-PhoneBook::Add() {
+void	PhoneBook::Add() {
     static int  index;
 
     this->contactArr[index % 8].setIndex(index % 8);
@@ -26,8 +30,13 @@ PhoneBook::Add() {
     index++;
 }
 
-PhoneBook::Search() {
+void	PhoneBook::Search() {
     std::cout << "---------------------------------------------" << std::endl;
-    std::cout << "|Index     |First Name|Last Name |Nickname  |";
+    std::cout << "|Index     |First Name|Last Name |Nickname  |" << std::endl;
     std::cout << "---------------------------------------------" << std::endl;
+	for (int index = 0;  this->contactArr[index])
+	{
+		this->contactArr[index].printContactRow();
+		index++;
+	}
 }

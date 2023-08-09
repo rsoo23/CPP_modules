@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
+#include "Contact.hpp"
+#include <iostream>
 #include <string>
 
 int main(void)
@@ -22,7 +24,7 @@ int main(void)
     MyPhoneBook.InitPhoneBook();
     while (input != "EXIT")
     {
-        std::cout << "Please enter one: ADD | SEARCH | EXIT" << std::endl;
+        std::cout << "Please enter one: \e[0;32mADD \e[0;37m| \e[0;34mSEARCH \e[0;37m| \e[0;31mEXIT\e[0m" << std::endl;
         std::cin >> input;
         if (input == "ADD")
             MyPhoneBook.Add();
