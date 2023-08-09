@@ -45,6 +45,27 @@ void	Contact::setInfo() {
     this->darkestSecret = temp;
 }
 
+void    Contact::printIndex() {
+    std::cout << "|" << std::setw(10) << std::right << this->index << "|";
+}
+
+std::string Contact::trimString(std::string str) {
+    str.resize(9);
+    str.resize(10, '.');
+    return (str);
+}
+
 void	Contact::printContactRow() {
-	
+	if (this->firstName.length() > 10)
+        this->firstName = this->trimString(this->firstName);
+    std::cout << std::setw(10) << std::right << this->firstName << "|";
+
+	if (this->lastName.length() > 10)
+        this->lastName = this->trimString(this->lastName);
+    std::cout << std::setw(10) << std::right << this->lastName << "|";
+
+	if (this->nickname.length() > 10)
+        this->nickname = this->trimString(this->nickname);
+
+    std::cout << std::setw(10) << std::right << this->nickname << "|";
 }

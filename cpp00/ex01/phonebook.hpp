@@ -19,11 +19,12 @@ class PhoneBook {
     public:
         PhoneBook();
         ~PhoneBook();
-        void    InitPhoneBook();
-        void    Add();
-        void    Search();
+        void Add();
+        void Search();
+        void printInfoHeaderField();
 
     private:
+        int     number_of_contacts;
         Contact contactArr[8];
 };
 

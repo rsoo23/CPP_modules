@@ -12,8 +12,6 @@
 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include <iostream>
-#include <string>
 
 int main(void)
 {
@@ -21,7 +19,6 @@ int main(void)
     PhoneBook   MyPhoneBook;
 
     input = "";
-    MyPhoneBook.InitPhoneBook();
     while (input != "EXIT")
     {
         std::cout << "Please enter one: \e[0;32mADD \e[0;37m| \e[0;34mSEARCH \e[0;37m| \e[0;31mEXIT\e[0m" << std::endl;

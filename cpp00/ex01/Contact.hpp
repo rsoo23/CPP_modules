@@ -13,17 +13,21 @@
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
+#include <iomanip> // header providing parametric manipulators
 #include <iostream>
 #include <string>
+#include <cctype> // isdigit
+#include <cstdlib> // atoi
 
 class Contact {
     public:
         Contact();
         ~Contact();
-        void    setIndex(int index);
-        void    setInfo();
-		void	printContactRow();
-		void	trimString();
+        void setIndex(int index);
+        void setInfo();
+		void printContactRow();
+        void printIndex();
+		std::string trimString(std::string);
 
     private:
         int         index;
