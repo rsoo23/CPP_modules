@@ -13,6 +13,7 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
+// CONSTRUCTOR
 PhoneBook::PhoneBook() {
     for (int i = 0; i < 8; i++) {
         this->contactArr[i] = Contact();
@@ -20,6 +21,7 @@ PhoneBook::PhoneBook() {
     this->number_of_contacts = 0;
 };
 
+// DESTRUCTOR
 PhoneBook::~PhoneBook() {};
 
 
@@ -38,10 +40,51 @@ void PhoneBook::printInfoHeaderField() {
     std::cout << "---------------------------------------------" << std::endl;
 }
 
-void	PhoneBook::Search() {
+void PhoneBook::printAllContactRows() {
     int index = -1;
-    int input_index_str;
 
+    std::cout << "NO OF CONTACS" << this->number_of_contacts << std::endl;
+    while (++index < (this->number_of_contacts % 8))
+    {
+        this->contactArr[index].printIndex();
+		this->contactArr[index].printContactRow();
+        std::cout << std::endl;
+        std::cout << "---------------------------------------------" << std::endl;
+    }
+}
+
+void    PhoneBook::getIndex() {
+    int input_index;
+    bool exit = false;
+
+    while (exit == false)
+    {
+        std::cout << "\e[0;34mPlease enter an index: \e[0m";
+        if (!(std::cin >> input_index)) {
+            std::cout << "\e[0;31mError: Only numeric inputs are allowed\e[0m" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+            continue;
+        }
+        if (input_index >= 0 && input_index < (this->number_of_contacts % 8)) {
+            std::cout << input_index << std::endl;
+            std::cout << "  valid index" << std::endl;
+
+            this->printInfoHeaderField();
+            this->contactArr[input_index].printIndex();
+		    this->contactArr[input_index].printContactRow();
+            std::cout << std::endl;
+            std::cout << "---------------------------------------------" << std::endl;
+            exit = true;
+        }
+        else
+            std::cout << "\e[0;34mError: Index is out of scope\e[0m" << std::endl;
+        std::cin.clear();
+        std::cin.ignore();
+    }
+}
+
+void	PhoneBook::Search() {
     if (this->number_of_contacts == 0)
     {
         std::cout << std::endl;
@@ -49,32 +92,7 @@ void	PhoneBook::Search() {
         std::cout << std::endl;
         return ;
     }
-
 	this->printInfoHeaderField();
-
-    while (++index < this->number_of_contacts)
-    {
-        this->contactArr[index].printIndex();
-		this->contactArr[index].printContactRow();
-        std::cout << std::endl;
-        std::cout << "---------------------------------------------" << std::endl;
-    }
-
-    while (1)
-    {
-        std::cout << "\e[0;34mPlease enter an index: \e[0m";
-        std::cin >> input_index_str;
-        std::cout << number_of_contacts << std::endl;
-        if (input_index_str >= 0 && input_index_str < this->number_of_contacts)
-        {
-            this->printInfoHeaderField();
-            this->contactArr[input_index_str].printIndex();
-		    this->contactArr[input_index_str].printContactRow();
-            std::cout << std::endl;
-            std::cout << "---------------------------------------------" << std::endl;
-            break ;
-        }
-        else
-            std::cout << "\e[0;31mInvalid index. Please try again... \e[0m" << std::endl;
-    }
+    this->printAllContactRows();
+    this->getIndex();
 }

@@ -22,6 +22,8 @@ class PhoneBook {
         void Add();
         void Search();
         void printInfoHeaderField();
+        void printAllContactRows();
+        void getIndex();
 
     private:
         int     number_of_contacts;
