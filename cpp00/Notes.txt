@@ -28,3 +28,7 @@ Ex:
 void MyClass::setValue(int value) {
     this->value = value;
 }
+
+pragma once
+    - marks that specific header file so that it won't be included again during the same 
+    compilation process, regardless of how many times it's referenced. 

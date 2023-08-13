@@ -21,7 +21,7 @@ class Account {
 
 public:
 
-	typedef Account		t;
+	typedef Account		t; // type alias: can use t instead of Account
 
 	static int	getNbAccounts( void );
 	static int	getTotalAmount( void );
@@ -35,8 +35,10 @@ public:
 	void	makeDeposit( int deposit );
 	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
-	void	displayStatus( void ) const;
-
+	void	displayStatus( void ) const; 
+	
+	// const for functions: the function won't change the object it's called on
+	// ensures that function will not mess up object's data
 
 private:
 
