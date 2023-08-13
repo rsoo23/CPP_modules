@@ -42,9 +42,12 @@ void PhoneBook::printInfoHeaderField() {
 
 void PhoneBook::printAllContactRows() {
     int index = -1;
+    int max_index;
 
-    std::cout << "NO OF CONTACS" << this->number_of_contacts << std::endl;
-    while (++index < (this->number_of_contacts % 8))
+    max_index = this->number_of_contacts;
+    if (this->number_of_contacts > 8)
+        max_index = 8;
+    while (++index < max_index)
     {
         this->contactArr[index].printIndex();
 		this->contactArr[index].printContactRow();
@@ -55,20 +58,25 @@ void PhoneBook::printAllContactRows() {
 
 void    PhoneBook::getIndex() {
     int input_index;
+    int max_index;
     bool exit = false;
 
     while (exit == false)
     {
+        max_index = this->number_of_contacts;
+
+        if (this->number_of_contacts > 8)
+            max_index = 8;
+
         std::cout << "\e[0;34mPlease enter an index: \e[0m";
         if (!(std::cin >> input_index)) {
             std::cout << "\e[0;31mError: Only numeric inputs are allowed\e[0m" << std::endl;
             std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+            std::cin.ignore();
             continue;
         }
-        if (input_index >= 0 && input_index < (this->number_of_contacts % 8)) {
+        else if (input_index >= 0 && input_index < max_index) {
             std::cout << input_index << std::endl;
-            std::cout << "  valid index" << std::endl;
 
             this->printInfoHeaderField();
             this->contactArr[input_index].printIndex();
@@ -78,7 +86,7 @@ void    PhoneBook::getIndex() {
             exit = true;
         }
         else
-            std::cout << "\e[0;34mError: Index is out of scope\e[0m" << std::endl;
+            std::cout << "\e[0;31mError: Index is out of scope\e[0m" << std::endl;
         std::cin.clear();
         std::cin.ignore();
     }
