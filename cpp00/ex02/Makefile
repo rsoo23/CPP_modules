@@ -13,12 +13,9 @@
 NAME = account
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-CPP_FILES = Account.cpp
+CPP_FILES = Account.cpp tests.cpp
 OBJ_FILES = $(CPP_FILES:.cpp=.o)
 RM = rm -rf
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 

@@ -11,47 +11,56 @@
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <iostream>
+#include <ctime>
 
-Account::Account( int initial_deposit ) {
+int Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
+
+Account::Account( int initial_deposit ) : _amount(initial_deposit) {
     static int index;
 
     this->_accountIndex = index;
-    this->_amount = 0;
     this->_nbDeposits = 0;
-    this->_nbWithdrawals = 0;
 
-    this->_amount += initial_deposit;
+	this->_nbAccounts++;
+	this->_totalAmount += initial_deposit;
 
     _displayTimestamp();
     std::cout << " index:" << this->_accountIndex 
         << ";amount:" << this->_amount 
         << ";created" << std::endl;
-    displayAccountsInfos();
 
     index++;
 }
 
 Account::~Account() {
-    _displayTimestamp();
-    std::cout << " index:" << this->_accountIndex 
-        << ";amount:" << this->_amount 
-        << ";closed" << std::endl;
+	_displayTimestamp();
+	std::cout << " index:" << this->_accountIndex 
+		<< ";amount:" << this->_amount 
+		<< ";closed" << std::endl;
 }
 
-static int Account::getNbAccounts() {
-    return (this->_nbAccounts);
+// the destructors are called in a reversed fashion (last in, first out principle)
+// this is a fundamental characteristic of how C++ deals with the lifetime of objects
+
+int Account::getNbAccounts() {
+    return (_nbAccounts);
+}
+// you can't use this-> on static functions
+
+int Account::getTotalAmount() {
+    return (_totalAmount);
 }
 
-static int Account::getTotalAmount() {
-    return (this->_totalAmount);
+int Account::getNbDeposits() {
+    return (_totalNbDeposits);
 }
 
-static int Account::getNbDeposits() {
-    return (this->_totalNbDeposits);
-}
-
-static int Account::getNbWithdrawals() {
-    return (this->_totalNbWithdrawals);
+int Account::getNbWithdrawals() {
+    return (_totalNbWithdrawals);
 }
 
 void Account::makeDeposit( int deposit ) {
@@ -59,10 +68,12 @@ void Account::makeDeposit( int deposit ) {
     std::cout << " index:" << this->_accountIndex
         << ";p_amount:" << this->_amount
         << ";deposit:" << deposit;
+
     this->_nbDeposits++;
     this->_totalNbDeposits++;
     this->_amount += deposit;
     this->_totalAmount += deposit;
+
     std::cout << ";amount:" << this->_amount
         << ";nb_deposits:" << this->_nbDeposits
         << std::endl;
@@ -72,14 +83,17 @@ bool Account::makeWithdrawal( int withdrawal ) {
     _displayTimestamp();
     std::cout << " index:" << this->_accountIndex
         << ";p_amount:" << this->_amount;
-    if (withdrawal > _totalAmount) {
+
+    if (withdrawal > this->_amount) {
         std::cout << ";withdrawal:refused" << std::endl;
         return (false);
     }
+
     this->_nbWithdrawals++;
     this->_totalNbWithdrawals++;
     this->_amount -= withdrawal;
     this->_totalAmount -= withdrawal;
+
     std::cout << ";withdrawal:" << withdrawal
         << ";amount:" << this->_amount
         << ";nb_withdrawals:" << this->_nbWithdrawals
@@ -87,24 +101,32 @@ bool Account::makeWithdrawal( int withdrawal ) {
     return (true);
 }
 
-static void Account::_displayTimestamp() {
+void Account::_displayTimestamp() {
+	std::time_t rawTime;
+	struct std::tm* timeInfo; // this struct holds broken-down components of day and time
+	char time_buffer[80];
 
+	std::time(&rawTime); // get the current time
+	timeInfo = std::localtime(&rawTime); // convert to local time
+	std::strftime(time_buffer, sizeof(time_buffer), "[%Y%m%d_%H%M%S]", timeInfo); // format the time
+
+	std::cout << time_buffer;
 }
 
 void Account::displayAccountsInfos () {
+	_displayTimestamp();
+	std::cout << " accounts:" << getNbAccounts()
+		<< ";total:" << getTotalAmount()
+		<< ";deposits:" << getNbDeposits()
+		<< ";withdrawals:" << getNbWithdrawals()
+		<< std::endl;
+}
+
+void Account::displayStatus () const {
     _displayTimestamp();
     std::cout << " index:" << this->_accountIndex
         << ";amount:" << this->_amount
         << ";deposits:" << this->_nbDeposits
         << ";withdrawals:" << this->_nbWithdrawals
-        std::endl;
-}
-
-void Account::displayStatus () const {
-    _displayTimestamp();
-    std::cout << " accounts:" << getNbAccounts()
-        << ";total:" << getTotalAmount()
-        << ";deposits:" << getNbDeposits()
-        << ";withdrawals:" << getNbWithdrawals()
-        std::endl;
+        << std::endl;
 }

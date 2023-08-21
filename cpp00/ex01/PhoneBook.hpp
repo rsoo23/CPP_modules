@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:58:14 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/07 21:58:14 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/21 21:11:36 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define PHONEBOOK_HPP
 
 #include "Contact.hpp"
+#include <limits>
 
 class PhoneBook {
     public:

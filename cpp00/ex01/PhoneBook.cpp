@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 21:57:58 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/07 21:57:58 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/21 21:14:46 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void    PhoneBook::getIndex() {
         std::cout << "\e[0;34mPlease enter an index: \e[0m";
         if (!(std::cin >> input_index)) {
             std::cout << "\e[0;31mError: Only numeric inputs are allowed\e[0m" << std::endl;
-            std::cin.clear();
-            std::cin.ignore();
+            std::cin.clear(); 													// to clear the error flags and reset the stream's state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // to ignore the remaining characters
             continue;
         }
         else if (input_index >= 0 && input_index < max_index) {
@@ -87,8 +87,6 @@ void    PhoneBook::getIndex() {
         }
         else
             std::cout << "\e[0;31mError: Index is out of scope\e[0m" << std::endl;
-        std::cin.clear();
-        std::cin.ignore();
     }
 }
 
