@@ -10,14 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = account
+NAME = BraiiiiiiinnnzzzZ
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-CPP_FILES = Account.cpp
-OBJ_FILES = $(CPP_FILES:.cpp=.o)
+CPP_FILES = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+OBJ_DIR = objects
+OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(CPP_FILES:.cpp=.o))
 RM = rm -rf
 
-%.o: %.cpp
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
@@ -26,7 +28,7 @@ $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ_FILES)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

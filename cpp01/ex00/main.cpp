@@ -15,12 +15,21 @@
 int main( void ) {
     std::string name;
 
-    std::cout << "[stack] Please enter \e[0;32mzombie\e[0m name:" <<
+    std::cout << YELLOW << "[stack] " << RESET << "Please enter " << GREEN << "zombie " << RESET << "name: ";
     std::cin >> name;
 
-    std::cout << "[heap] Please enter \e[0;32mzombie\e[0m name:" <<
+	Zombie stackZombie = Zombie(name);
+	stackZombie.announce();
+
+    std::cout << YELLOW << "[heap] " << RESET << "Please enter " << GREEN << "zombie " << RESET << "name: ";
     std::cin >> name;
 
-    std::cout << "[chump] Please enter \e[0;32mzombie\e[0m name:" <<
+	Zombie* zombiePointer = newZombie(name);
+	zombiePointer->announce();
+	delete zombiePointer;
+
+    std::cout << YELLOW << "[chump] " << RESET << "Please enter " << GREEN << "zombie " << RESET << "name: ";
     std::cin >> name;
+
+	randomChump(name);
 }
