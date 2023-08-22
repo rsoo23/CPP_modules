@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 21:58:14 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 09:54:56 by rsoo             ###   ########.fr       */
+/*   Created: 2023/08/22 09:46:31 by rsoo              #+#    #+#             */
+/*   Updated: 2023/08/22 09:48:45 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#include "Zombie.hpp"
 
-#include "Contact.hpp"
-#include <limits>
+Zombie::Zombie( std::string name ) {
+	this->name = name;
+}
 
-class PhoneBook {
-    public:
-        PhoneBook();
-        ~PhoneBook();
-        void Add();
-        void Search();
-        void printInfoHeaderField();
-        void printAllContactRows();
-        void getIndex();
+Zombie::~Zombie( void ) {
+    std::cout << "Zombie " << YELLOW << name << RESET << " is destroyed" << std::endl << std::endl;
+}
 
-    private:
-        int     number_of_contacts;
-        Contact contactArr[8];
-};
-
-#endif
+void Zombie::announce( void ) {
+    std::cout << YELLOW << name << ":" << RED << " BraiiiiiiinnnzzzZ..." << RESET << std::endl << std::endl;
+}
