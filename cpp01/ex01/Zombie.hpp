@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 09:46:41 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 09:49:42 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/22 10:29:12 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ZOMBIE_HPP
 
 #include <iostream>
+#include <limits>
 
 #define BLACK 	"\e[0;30m"
 #define RED 	"\e[0;31m"
@@ -27,10 +28,11 @@
 
 class Zombie {
     public:
-        Zombie( std::string name );
+        Zombie( void );
         ~Zombie( void );
 
         void    announce( void );
+		void	giveName( std::string name );
 
     private:
         std::string name;
