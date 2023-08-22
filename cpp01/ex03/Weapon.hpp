@@ -6,22 +6,23 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:22:22 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 12:07:57 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/22 23:41:27 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "unnecessary_violence.h"
 
 #pragma once
 #ifndef WEAPON_HPP
 #define WEAPON_HPP
 
-#include "unnecessary_violence.h"
-
 class Weapon {
 	public:
+		Weapon( void );
 		Weapon( std::string type );
 		~Weapon( void );
 
-		std::string& getType( void ) const;
+		const std::string& getType( void );
 		void setType( std::string type );
 
 	private:

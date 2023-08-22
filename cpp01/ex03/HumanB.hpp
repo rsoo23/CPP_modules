@@ -6,15 +6,15 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:17:55 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 12:08:13 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/22 23:30:45 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "unnecessary_violence.h"
 
 #pragma once
 #ifndef HUMAN_B_HPP
 #define HUMAN_B_HPP
-
-#include "unnecessary_violence.h"
 
 class HumanB {
 	public:
