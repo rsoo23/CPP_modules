@@ -32,3 +32,17 @@ void MyClass::setValue(int value) {
 pragma once
     - marks that specific header file so that it won't be included again during the same 
     compilation process, regardless of how many times it's referenced. 
+
+dynamic allocation
+	Class* name = new Class[N] -> must have void constructor
+	delete [] name
+
+references and pointers
+	- references
+		- more intuitive syntax
+		- safer, in terms of avoiding null-pointer issues
+		- int& num; (you can directly change the value using num = .., while pointers
+		need dereferencing)
+	- pointers
+		- more flexibility
+		- can be reassigned to point to different objects
