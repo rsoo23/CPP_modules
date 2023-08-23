@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:17:24 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 23:30:28 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/23 09:07:09 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 class HumanA {
 	public:
-		HumanA( std::string name, Weapon weapon_type );
+		HumanA( std::string name, Weapon& weapon_type );
 		~HumanA( void );
 		void attack( void );
 
 	private:
 		std::string name;
-		Weapon weapon_type;
+		Weapon& weapon_type;
 };
 
 #endif

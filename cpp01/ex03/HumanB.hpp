@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:17:55 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/22 23:30:45 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/23 09:22:57 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class HumanB {
 		HumanB( std::string name );
 		~HumanB();
 		void attack( void );
-		void setWeapon ( Weapon weapon_type );
+		void setWeapon ( Weapon& weapon_type );
 
 	private:
 		std::string name;
-		Weapon weapon_type;
+		Weapon* weapon_type;
 };
 
 
