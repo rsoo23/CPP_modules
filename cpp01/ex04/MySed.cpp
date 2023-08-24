@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:51:05 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/23 18:47:32 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/24 10:01:38 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,33 +93,38 @@ void MySed::writeToOutputFile( std::string outputFilename ) {
 	size_t starting_pos;
 	size_t target_str_pos;
 	
-	while (std::getline(inputFile, buffer)) {
+	std::getline(inputFile, buffer);
+	while (inputFile) {
 		starting_pos = 0;
 		target_str_pos = 0;
 
 		while (starting_pos != std::string::npos) {
 			
 			target_str_pos = buffer.find(this->target_string, starting_pos);
-
-			std::cout << CYAN << "stpos " << starting_pos << std::endl;
-			std::cout << "targpos " << target_str_pos << RESET << std::endl;
 			
-			if (starting_pos == target_str_pos) {
-				std::cout << "replacing string" << std::endl;
+			if (starting_pos == 0 && target_str_pos == std::string::npos) {
+				outputFile << buffer << std::endl;
+				std::getline(inputFile, buffer);
+				break;
+			}
+			else if (starting_pos == target_str_pos) {
 				outputFile << this->replacement_string;
 				starting_pos += target_string.length();
 			}
 			else if (starting_pos < target_str_pos) {
-				std::cout << "string copied" << std::endl;
-				outputFile << buffer.substr(starting_pos, target_str_pos);
+				outputFile << buffer.substr(starting_pos, target_str_pos - starting_pos);
 				starting_pos += target_str_pos - starting_pos;
 			}
-			// else if (starting_pos == 0 && target_str_pos == std::string::npos) {
-			// 	outputFile << buffer << std::endl;
-			// 	break;
-			// }
+			if (target_str_pos == std::string::npos) {
+				std::getline(inputFile, buffer);
+				if (inputFile)
+					outputFile << std::endl;
+				break;
+			}
 		}
 	}
+	inputFile.close();
+	outputFile.close();
 }
 
 // sentence this is very this
