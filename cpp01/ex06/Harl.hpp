@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 10:04:31 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/24 11:45:54 by rsoo             ###   ########.fr       */
+/*   Created: 2023/08/24 11:37:39 by rsoo              #+#    #+#             */
+/*   Updated: 2023/08/24 11:59:57 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Harl {
 		Harl( void );
 		~Harl( void );
 		void complain( std::string level );
+		void complainLoop( int starting_index );
 
 	private:
 		void debug( void );

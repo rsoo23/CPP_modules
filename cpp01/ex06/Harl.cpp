@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 10:04:34 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/24 12:00:12 by rsoo             ###   ########.fr       */
+/*   Created: 2023/08/24 11:37:36 by rsoo              #+#    #+#             */
+/*   Updated: 2023/08/24 13:47:07 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Harl::~Harl( void ) {};
 
 void Harl::complain( std::string level ) {
 	void (Harl::*funcPtr[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	std::string levels_array[4] = {"debug", "info", "warning", "error"};
+	std::string levels_array[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	
 	for (int i = 0; i < 4; i++) {
 		if (level == levels_array[i]) {

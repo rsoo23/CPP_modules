@@ -6,12 +6,12 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 10:04:33 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/24 10:14:11 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/08/24 11:38:18 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SED_IS_FOR_LOSERS_H
-#define SED_IS_FOR_LOSERS_H
+#ifndef HARL_H
+#define HARL_H
 
 #include <iostream>
 #include "Harl.hpp"
