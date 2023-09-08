@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Fixed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 10:14:06 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/09 23:46:53 by rsoo             ###   ########.fr       */
+/*   Created: 2023/08/28 10:14:05 by rsoo              #+#    #+#             */
+/*   Updated: 2023/09/09 22:49:52 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.h"
+#ifndef FIXED_H
+#define FIXED_H
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#include <iostream>
+#include <cmath> // roundf
+#include "Fixed.hpp"
 
-class Fixed {
-	public:
-		Fixed( void );
-		Fixed( const Fixed& other );
-		Fixed& operator=( const Fixed& other );
-		~Fixed( void );
-
-		int getRawBits( void ) const;
-		void setRawBits( int const raw );
-
-	private:
-		int _rawBits;
-		static const int _bits;
-};
+#define BLACK 	"\e[0;30m"
+#define RED 	"\e[0;31m"
+#define GREEN 	"\e[0;32m"
+#define YELLOW 	"\e[0;33m"
+#define BLUE 	"\e[0;34m"
+#define PURPLE 	"\e[0;35m"
+#define CYAN 	"\e[0;36m"
+#define WHITE 	"\e[0;37m"
+#define RESET 	"\e[0m"
 
 #endif
