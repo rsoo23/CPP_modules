@@ -6,12 +6,13 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:14:06 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/09 23:46:53 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/10 20:37:23 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.h"
 
+#pragma once
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
