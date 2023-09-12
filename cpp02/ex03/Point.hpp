@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:16:15 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/12 15:47:28 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/12 23:15:34 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ class Point {
 		Point& operator=( const Point& other );
 		~Point( void );
 
-		const Fixed get_x_coord( void ) const;
-		const Fixed get_y_coord( void ) const;
+		const Fixed getXCoord( void ) const;
+		const Fixed getYCoord( void ) const;
 
 	private:
 		const Fixed x;
 		const Fixed y;
 };
+
+// << operator overload
+std::ostream& operator<<(std::ostream& out, const Point& pt);
 
 #endif

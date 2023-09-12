@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:16:13 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/12 15:47:24 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/12 23:32:36 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,29 @@ Point::Point(const Point& other) {
 }
 
 // copy assignment constructor
+// - if you want to remove the const, cast the var to the data type w/o const
 Point& Point::operator=(const Point& other) {
 	if (this != &other) {
-		this->set_x_coord(other.get_x_coord());
-		this->set_y_coord(other.get_y_coord());
+		(Fixed)this->x = other.getXCoord();
+		(Fixed)this->y = other.getYCoord();
 	}
 	return *this;	
 }
 
+// destructoru
+Point::~Point(void) {}
+
 // getters
-const Fixed Point::get_x_coord(void) const {
+const Fixed Point::getXCoord(void) const {
 	return this->x;
 }
 
-const Fixed Point::get_y_coord(void) const {
+const Fixed Point::getYCoord(void) const {
 	return this->y;
+}
+
+// << operator overload
+std::ostream& operator<<(std::ostream& out, const Point& pt) {
+	out << "x: hi " << pt.getXCoord() << ", y: " << pt.getYCoord();
+	return (out);
 }

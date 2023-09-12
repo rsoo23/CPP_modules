@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:14:05 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/12 10:20:07 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/12 23:13:17 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@
 #define CYAN 	"\e[0;36m"
 #define WHITE 	"\e[0;37m"
 #define RESET 	"\e[0m"
+
+bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif
