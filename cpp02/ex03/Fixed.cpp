@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:14:02 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/12 14:37:36 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/12 14:37:27 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,11 @@ const int Fixed::_fractionalBits = 8;
 Fixed::Fixed( void ): _rawBits(0) {}
 
 // int constructor
-// - converts int to fixed-point value
-/*
-ex: 
-12 = 0000 1100
-0000 1100 << fractionalBits = 0000 1100 << 8 = 0000 1100 0000 0000
-integer part: 0000 1100
-fractional part: 0000 0000
-*/
 Fixed::Fixed( const int n ) {
 	this->_rawBits = n << this->_fractionalBits;
 }
 
 // float constructor
-// - converts float to fixed-point value
-/*
-ex:
-3.65 = 11.101
-11.101 * (1 << 8) = 11.101 * 1 0000 0000 = 0000 0001 1101 0000
-integer part: 0000 0001 
-fractional part: 1101 0000
-*/
 Fixed::Fixed( const float n ) {
 	this->_rawBits = (roundf(n * (1 << this->_fractionalBits)));
 }
@@ -50,9 +34,8 @@ Fixed::Fixed( const Fixed& other ) {
 
 // copy assignment constructor
 Fixed& Fixed::operator=( const Fixed& other ) {
-	if (this != &other) { 			// this is to prevent self-assignments
+	if (this != &other) 			// this is to prevent self-assignments
 		this->setRawBits(other.getRawBits());
-	}
 	return (*this);
 }
 
@@ -129,67 +112,3 @@ Fixed Fixed::operator*(const Fixed& num) const {
 Fixed Fixed::operator/(const Fixed& num) const {
 	return Fixed(this->toFloat() / num.toFloat());
 }
-
-// pre-increment overload
-Fixed Fixed::operator++( void ) {
-	++this->_rawBits;
-	return *this;
-}
-
-// post-increment overload
-Fixed Fixed::operator++( int ) {
-	Fixed temp = *this;
-	++this->_rawBits;
-	return temp;
-}
-
-// pre-decrement overload
-Fixed Fixed::operator--( void ) {
-	--this->_rawBits;
-	return *this;
-}
-
-// post-decrement overload
-Fixed Fixed::operator--( int ) {
-	Fixed temp = *this;
-	--this->_rawBits;
-	return temp;
-}
-
-// min overload (without const)
-const Fixed& Fixed::min(Fixed& num1, Fixed& num2) {
-	if (num1._rawBits < num2._rawBits)
-		return num1;
-	return num2;
-}
-
-// min overload (with const)
-const Fixed& Fixed::min(const Fixed& num1, const Fixed& num2) {
-	if (num1._rawBits < num2._rawBits)
-		return num1;
-	return num2;
-}
-
-// max overload (without const)
-const Fixed& Fixed::max(Fixed& num1, Fixed& num2) {
-	if (num1._rawBits > num2._rawBits)
-		return num1;
-	return num2;
-}
-
-// max overload (with const)
-const Fixed& Fixed::max(const Fixed& num1, const Fixed& num2) {
-	if (num1._rawBits > num2._rawBits)
-		return num1;
-	return num2;
-}
-
-// member version, inside the class
-// bool operator<(const NewType& rhs) const {
-//     return val < rhs.val;
-// }
-
-// non-member version, outside the class
-// bool operator<(const NewType& lhs, const NewType& rhs) {
-//     return lhs.GetVal() < rhs.GetVal();
-// }

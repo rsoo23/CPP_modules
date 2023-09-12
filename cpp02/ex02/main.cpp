@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:14:07 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/12 09:56:33 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/12 10:41:10 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,32 +86,3 @@ int main( void ) {
 
 // the reason why ++a increases by 0.00390625 is because it represents 1/256 which is the 
 // smallest graduation in a fixed point number with 9 fractional bits
-
-// Expected Output:
-
-// Default constructor called
-// Int constructor called
-// Float constructor called
-// Copy constructor called
-
-// Copy assignment operator called
-// Float constructor called
-// Copy assignment operator called
-
-// Destructor called
-
-// a is 1234.43
-// b is 10
-// c is 42.4219
-// d is 10
-
-// a is 1234 as integer
-// b is 10 as integer
-// c is 42 as integer
-// d is 10 as integer
-
-// Destructor called
-// Destructor called
-// Destructor called
-// Destructor called
-
