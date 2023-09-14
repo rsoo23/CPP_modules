@@ -57,3 +57,21 @@ fixed point numbers
 friend function
     - a function that is not a member of a class, but is given access to private 
     and protected members of the class
+
+inheritance rules:
+	- base class: private, public, protected
+
+	- public inheritance: 
+		public preserved
+		protected preserved
+		private preserved
+
+	- protected inheritance: 
+		public -> protected
+		protected preserved
+		private preserved
+
+	- private inheritance: 
+		public -> private
+		protected -> private
+		private preserved
