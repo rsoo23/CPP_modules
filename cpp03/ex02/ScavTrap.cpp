@@ -31,8 +31,8 @@ ScavTrap::ScavTrap( std::string name ): ClapTrap() {
 
 // copy constructor
 ScavTrap::ScavTrap( const ScavTrap& other ): ClapTrap() {
-    *this = other;
     std::cout << GREEN << "ScavTrap copy constructor called" << RESET << std::endl;
+    *this = other;
 }
 
 // copy assignment operator

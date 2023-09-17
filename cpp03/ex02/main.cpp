@@ -14,36 +14,41 @@
 
 int main() {
     ClapTrap a("Peppa Pig");
-    ScavTrap b;
-    ScavTrap c("Jackson Michael");
-    ScavTrap d( c );
-    ScavTrap e;
+    std::cout << std::endl;
+    ScavTrap b("Jackson Michael");
+    std::cout << std::endl;
+    FragTrap c("Lord Farquaad");
+    std::cout << std::endl;
+    FragTrap d;
+    std::cout << std::endl;
+    FragTrap e( c );
+    std::cout << std::endl;
     d = c;
 
     std::cout << std::endl;
-    std::cout << a.getName() << ": " << RESET << "HP=" << a.getHP() << ", EP=" << a.getEP() << ", AD=" << a.getAD() << std::endl;
-    std::cout << b.getName() << ": " << RESET << "HP=" << b.getHP() << ", EP=" << b.getEP() << ", AD=" << b.getAD() << std::endl;
     std::cout << c.getName() << ": " << RESET << "HP=" << c.getHP() << ", EP=" << c.getEP() << ", AD=" << c.getAD() << std::endl;
     std::cout << d.getName() << ": " << RESET << "HP=" << d.getHP() << ", EP=" << d.getEP() << ", AD=" << d.getAD() << std::endl;
     std::cout << e.getName() << ": " << RESET << "HP=" << e.getHP() << ", EP=" << e.getEP() << ", AD=" << e.getAD() << std::endl << std::endl;
     
-    // b activates guardGate
-    b.guardGate();
+    // c, d, e activates highFiveGuys
+    c.highFiveGuys();
+    d.highFiveGuys();
+    e.highFiveGuys();
     std::cout << std::endl;
 
-    // b attacks a
-    b.attack(a.getName());
-    a.takeDamage(b.getAD());
+    // c attacks a
+    c.attack(a.getName());
+    a.takeDamage(c.getAD());
     std::cout << std::endl;
 
     std::cout << a.getName() << ": " << RESET << "HP=" << a.getHP() << ", EP=" << a.getEP() << ", AD=" << a.getAD() << std::endl;
-    std::cout << b.getName() << ": " << RESET << "HP=" << b.getHP() << ", EP=" << b.getEP() << ", AD=" << b.getAD() << std::endl << std::endl;
+    std::cout << c.getName() << ": " << RESET << "HP=" << c.getHP() << ", EP=" << c.getEP() << ", AD=" << c.getAD() << std::endl << std::endl;
     
-    // b is repaired
-    b.beRepaired(2);
-    std::cout << b.getName() << ": " << RESET << "HP=" << b.getHP() << ", EP=" << b.getEP() << ", AD=" << b.getAD() << std::endl << std::endl;
+    // c is repaired
+    c.beRepaired(2);
+    std::cout << c.getName() << ": " << RESET << "HP=" << c.getHP() << ", EP=" << c.getEP() << ", AD=" << c.getAD() << std::endl << std::endl;
 
-    // b self attacks    
-    b.attack(b.getName());
+    // c self attacks    
+    c.attack(c.getName());
     std::cout << std::endl;
 }
