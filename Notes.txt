@@ -75,3 +75,18 @@ inheritance rules:
 		public -> private
 		protected -> private
 		private preserved
+
+multiple inheritance
+	- let's say we have two base classes with both function1()
+	BaseClass1: function1(), BaseClass2: function1()
+
+	and a derived class with function1()
+	DerivedClass: public BaseClass1, public BaseClass2
+		- when we call derived.function1(), overriding occurs,
+		  so the function1() from the derived class is executed
+
+	if the derived class doesn't have function1()
+		- when derived.function1() is called:
+		- an error occurs since there is a conflict between BaseClass1 
+		  BaseClass2 (same function1())
+
