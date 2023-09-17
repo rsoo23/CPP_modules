@@ -33,7 +33,7 @@ class ClapTrap {
         unsigned int getEP() const;
         unsigned int getAD() const;
 
-    private:
+    protected:
         std::string  _name;
         unsigned int _hitPoints;
         unsigned int _energyPoints;
