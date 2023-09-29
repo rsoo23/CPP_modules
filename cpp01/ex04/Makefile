@@ -6,7 +6,7 @@
 #    By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/23 10:03:05 by rsoo              #+#    #+#              #
-#    Updated: 2023/08/23 12:51:40 by rsoo             ###   ########.fr        #
+#    Updated: 2023/09/29 10:26:17 by rsoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CPP_FILES = main.cpp MySed.cpp
 HPP_FILES = MySed.hpp
 OBJ_DIR = objects
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(CPP_FILES:.cpp=.o))
+REPLACE_FILES = *.replace
 RM = rm -rf
 
 $(OBJ_DIR)/%.o: %.cpp $(HPP_FILES)
@@ -32,6 +33,6 @@ clean:
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(REPLACE_FILES)
 
 re: fclean all

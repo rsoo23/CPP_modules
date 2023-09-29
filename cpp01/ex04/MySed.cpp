@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:51:05 by rsoo              #+#    #+#             */
-/*   Updated: 2023/08/24 10:01:38 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/09/29 09:52:15 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ bool MySed::openInputFile( void ) {
 	if (inputFile.is_open()) {
 		std::cout << GREEN << "Input file opened" << RESET << std::endl;
 		return (true);
+	} else if (inputFile.fail()) {
+		std::cout << RED << "Failed to open input file (Permission Denied) " << RESET << std::endl;
 	} else {
 		std::cout << RED << "Input file does not exist" << RESET << std::endl;
 	}
