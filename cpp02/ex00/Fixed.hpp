@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:14:06 by rsoo              #+#    #+#             */
-/*   Updated: 2023/09/10 20:37:23 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/03 08:21:38 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Fixed {
 
 	private:
 		int _rawBits;
-		static const int _bits;
+		static const int _fractionalBits;
 };
 
 #endif
