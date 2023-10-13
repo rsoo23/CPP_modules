@@ -16,7 +16,8 @@
 #ifndef DIAMONDTRAP_HPP
 #define DIAMONDTRAP_HPP
 
-class DiamondTrap : public ClapTrap {
+// inheritance order: inherits the last one (FragTrap)
+class DiamondTrap : public ScavTrap, public FragTrap {
     public:
         DiamondTrap();
         DiamondTrap( std::string name );
@@ -24,8 +25,13 @@ class DiamondTrap : public ClapTrap {
         DiamondTrap& operator=( const DiamondTrap& other );
         ~DiamondTrap();
 
-        void attack( const std::string& target );
-        void highFiveGuys();
+		using ScavTrap::attack;
+
+		void whoAmI();
+		std::string getName();
+
+	private:
+		std::string _name;
 };
 
 #endif

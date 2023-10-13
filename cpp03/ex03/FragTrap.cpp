@@ -12,21 +12,26 @@
 
 #include "ClapTrap.h"
 
+unsigned int FragTrap::_fragHitPoints  = 100;
+unsigned int FragTrap::_fragEnergyPoints = 100;
+unsigned int FragTrap::_fragAttackDamage = 30;
+
 // constructors
 FragTrap::FragTrap(): ClapTrap() {
     _name = "no name"; 
     _hitPoints = 100;
-    _energyPoints = 100; 
+    _energyPoints = 100;
     _attackDamage = 30;
-    std::cout << GREEN << "FragTrap constructor called: no name" << RESET << std::endl;
+
+    std::cout << GREEN << "FragTrap constructor called: " << _name << RESET << std::endl;
 }
 
 FragTrap::FragTrap( std::string name ): ClapTrap() {
     _name = name; 
     _hitPoints = 100;
-    _energyPoints = 100; 
+    _energyPoints = 100;
     _attackDamage = 30;
-    std::cout << GREEN << "FragTrap constructor called: " << name << RESET << std::endl;
+    std::cout << GREEN << "FragTrap constructor called: " << _name << RESET << std::endl;
 }
 
 // copy constructor

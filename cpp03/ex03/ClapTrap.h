@@ -14,9 +14,11 @@
 #define CLAPTRAP_H
 
 #include <iostream>
+#include <string>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 #define BLACK 	"\e[0;30m"
 #define RED 	"\e[0;31m"

@@ -12,25 +12,36 @@
 
 #include "ClapTrap.h"
 
+// FragTrap::_hitPoints = 100;
+// FragTrap::_energyPoints = 100;
+// FragTrap::_attackDamage = 30;
+
+// ScavTrap::_hitPoints = 100;
+// ScavTrap::_energyPoints = 50;
+// ScavTrap::_attackDamage = 20;
+
 // constructors
 DiamondTrap::DiamondTrap(): ClapTrap() {
-    _name = "no name"; 
-    _hitPoints = 100;
-    _energyPoints = 50; 
-    _attackDamage = 20;
-    std::cout << GREEN << "DiamondTrap constructor called: no name" << RESET << std::endl;
+    _name = "no name";
+    _hitPoints = FragTrap::_fragHitPoints;
+    _energyPoints = ScavTrap::_scavEnergyPoints; 
+    _attackDamage = FragTrap::_fragAttackDamage;
+    std::cout << GREEN << "DiamondTrap constructor called: " << _name << RESET << std::endl;
 }
 
-DiamondTrap::DiamondTrap( std::string name ): ClapTrap() {
-    _name = name; 
-    _hitPoints = 100;
-    _energyPoints = 50; 
-    _attackDamage = 20;
-    std::cout << GREEN << "DiamondTrap constructor called: " << name << RESET << std::endl;
+// 2 problems:
+// copy assignment operator doesn't work
+// name + clap name doesn't
+DiamondTrap::DiamondTrap( std::string name ): ClapTrap(), ScavTrap(), FragTrap(name + "_clap_name") {
+    _name = name;
+    _hitPoints = FragTrap::_fragHitPoints;
+    _energyPoints = ScavTrap::_scavEnergyPoints;
+    _attackDamage = FragTrap::_fragAttackDamage;
+    std::cout << GREEN << "DiamondTrap constructor called: " << _name << RESET << std::endl;
 }
 
 // copy constructor
-DiamondTrap::DiamondTrap( const DiamondTrap& other ): ClapTrap() {
+DiamondTrap::DiamondTrap( const DiamondTrap& other ): ClapTrap(), ScavTrap(), FragTrap(other._name) {
     std::cout << GREEN << "DiamondTrap copy constructor called" << RESET << std::endl;
     *this = other;
 }
@@ -52,27 +63,12 @@ DiamondTrap::~DiamondTrap() {
     std::cout << RED << "DiamondTrap destructor called" << RESET << std::endl;
 }
 
-void DiamondTrap::attack( const std::string& target ) {
-    if (this->_name == target) {
-        std::cout << RED << "Error: A DiamondTrap can't attack itself!" RESET << std::endl;
-        return ;
-    } else if (this->_energyPoints == 0) {
-        std::cout << "DiamondTrap " << CYAN << this->_name << RESET \
-        << " cannot attack " << RED << "(0 energy points left) :(" << RESET << std::endl;
-        return ;
-    } else if (this->_hitPoints == 0) {
-        std::cout << "DiamondTrap " << CYAN << this->_name << RESET \
-        << " cannot attack " << RED << "(0 hit points left) :(" << RESET << std::endl;
-        return ;
-    }
-    this->_energyPoints--;
-
-    std::cout << "DiamondTrap " << CYAN << this->_name << RESET \
-    << " attacks " << PURPLE << target << RESET \
-    << " causing " << RED << this->_attackDamage << RESET \
-    << " points of damage!" << std::endl;
+void DiamondTrap::whoAmI() {
+    std::cout << PURPLE << "DiamondTrap name: " << this->_name << RESET << std::endl;
+    std::cout << PURPLE << "ClapTrap name: " << ClapTrap::_name << RESET << std::endl;
 }
 
-void DiamondTrap::guardGate() {
-    std::cout << PURPLE << "DiamondTrap is now in Gatekeeper mode" << RESET << std::endl;
+// getter
+std::string DiamondTrap::getName() {
+	return this->_name;
 }

@@ -90,3 +90,6 @@ multiple inheritance
 		- an error occurs since there is a conflict between BaseClass1 
 		  BaseClass2 (same function1())
 
+virtual destructors
+	- used in base class destructor
+	- ensures both base class and derived class destructors are called

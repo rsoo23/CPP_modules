@@ -12,7 +12,7 @@
 
 NAME = ClapTrap3
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -Wno-shadow -Wshadow -std=c++98 -fsanitize=address -g3
 CPP_FILES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 HPP_FILES = *.hpp
 OBJ_DIR = objects

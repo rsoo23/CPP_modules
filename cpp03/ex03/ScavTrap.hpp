@@ -16,7 +16,7 @@
 #ifndef SCAVTRAP_HPP
 #define SCAVTRAP_HPP
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
     public:
         ScavTrap();
         ScavTrap( std::string name );
@@ -26,6 +26,11 @@ class ScavTrap : public ClapTrap {
 
         void attack( const std::string& target );
         void guardGate();
+
+	protected:
+        static unsigned int _scavHitPoints;
+        static unsigned int _scavEnergyPoints;
+        static unsigned int _scavAttackDamage;
 };
 
 #endif

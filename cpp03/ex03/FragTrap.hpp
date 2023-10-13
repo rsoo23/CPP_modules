@@ -16,7 +16,7 @@
 #ifndef FRAGTRAP_HPP
 #define FRAGTRAP_HPP
 
-class FragTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
     public:
         FragTrap();
         FragTrap( std::string name );
@@ -26,6 +26,11 @@ class FragTrap : public ClapTrap {
 
         void attack( const std::string& target );
         void highFiveGuys();
+	
+	protected:
+        static unsigned int _fragHitPoints;
+        static unsigned int _fragEnergyPoints;
+        static unsigned int _fragAttackDamage;
 };
 
 #endif
