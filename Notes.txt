@@ -48,7 +48,6 @@ references and pointers
 		- can be reassigned to point to different objects
 
 floating point numbers
-    - 
 
 fixed point numbers
     - straightforward and efficient (integer arithmetic)
@@ -93,3 +92,28 @@ multiple inheritance
 virtual destructors
 	- used in base class destructor
 	- ensures both base class and derived class destructors are called
+	- ensure that the destructor of the most derived class is called when deleting a pointer to an object of the base class
+
+subtype polymorphism (run-time polymorphism)
+	- concept that allows you to treat derived classes as their base classes
+
+abstract classes
+	- classes that are meant to be subclassed
+	- contains one or more pure virtual functions that must be implemented by
+	  derived classes
+	- cannot be instantiated
+	- can also include:
+		- data members
+		- non-pure virtual methods
+
+interface
+	- collection of abstract methods (pure virtual functions)
+	- no data members
+
+virtual functions
+	- allow the overriding of base class functions in derived classes
+
+pure virtual functions
+	- virtual void doSomething() = 0;
+	- no implementation in the base class
+	- a way to define an interface that must be implemented by all derived classes

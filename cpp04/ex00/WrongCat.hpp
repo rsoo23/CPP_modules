@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 23:50:30 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/15 20:55:40 by rsoo             ###   ########.fr       */
+/*   Created: 2023/10/15 20:06:53 by rsoo              #+#    #+#             */
+/*   Updated: 2023/10/15 21:12:44 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.h"
 
 #pragma once
-#ifndef DOG_HPP
-#define DOG_HPP
+#ifndef WRONGCAT_HPP
+#define WRONGCAT_HPP
 
-class Dog: public Animal {
+// WrongCat: does not have the virtual keyword for makeSound()
+
+class WrongCat: public WrongAnimal {
 	public:
-		Dog();
-        Dog( const Dog& other );
-        Dog& operator=( const Dog& other );
-		~Dog();
+		WrongCat();
+        WrongCat( const WrongCat& other );
+        WrongCat& operator=( const WrongCat& other );
+		~WrongCat();
 
-		virtual void makeSound() const;
+		void makeSound() const;
 };
 
 #endif

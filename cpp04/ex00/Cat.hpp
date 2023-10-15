@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 23:51:39 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/13 23:52:28 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/15 20:55:34 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ class Cat: public Animal {
         Cat& operator=( const Cat& other );
 		~Cat();
 
-	protected:
-		std::string type;
+		virtual void makeSound() const;
 };
 
 #endif
