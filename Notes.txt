@@ -113,7 +113,25 @@ interface
 virtual functions
 	- allow the overriding of base class functions in derived classes
 
-pure virtual functions
+pure virtual functions (interface)
 	- virtual void doSomething() = 0;
 	- no implementation in the base class
 	- a way to define an interface that must be implemented by all derived classes
+
+shallow copy
+	- copies over the variables of the original object
+	- works if none of the variables is defined in the heap
+
+	- if the data is dynamically allocated from the heap section, then the copied object
+	  variable will also reference the same memory location
+	- This will create ambiguity and run-time errors, dangling pointer. Since both objects
+	  will reference to the same memory location, then change made by one will reflect those
+	  change in another object as well. Since we wanted to create a replica of the object,
+	  this purpose will not be filled by Shallow copy
+
+deep copy
+	- In Deep copy, an object is created by copying data of all variables, and it also allocates
+	  similar memory resources with the same value to the object. In order to perform Deep copy,
+	  we need to explicitly define the copy constructor and assign dynamic memory as well, if required.
+	  Also, it is required to dynamically allocate memory to the variables in the other constructors,
+	  as well
