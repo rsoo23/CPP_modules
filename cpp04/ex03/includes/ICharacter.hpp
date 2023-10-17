@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.hpp                                       :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 16:36:09 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/17 10:51:06 by rsoo             ###   ########.fr       */
+/*   Created: 2023/10/17 10:38:01 by rsoo              #+#    #+#             */
+/*   Updated: 2023/10/17 11:27:01 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.h"
 
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
-class AMateria {
+class ICharacter {
 	public:
-		AMateria();
-		AMateria( std::string& const type );
-		AMateria( const AMateria& other );
-		AMateria& operator=( const AMateria& other );
-		virtual ~AMateria();
-
-		std::string const& getType() const; // Returns the materia type
-		virtual AMateria* clone() const = 0;
-		virtual void use( ICharacter& target );
-
-	protected:
-		std::string type;
+		virtual ~ICharacter() {}
+		virtual std::string const& getName() const = 0;
+		virtual void equip( AMateria* m ) = 0;
+		virtual void unequip( int idx ) = 0;
+		virtual void use( int idx, ICharacter& target ) = 0;
 };
 
 #endif

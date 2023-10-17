@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:35:37 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/16 16:36:02 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/17 11:19:34 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #define AMATERIA_H
 
 #include <iostream>
+#include "AMateria.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
 
 #define RED 	"\e[0;31m"
 #define GREEN 	"\e[0;32m"
