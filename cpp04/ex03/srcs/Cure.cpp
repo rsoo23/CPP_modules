@@ -6,13 +6,13 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:22:54 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/17 11:07:46 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 14:12:32 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.h"
 
-Cure::Cure(): type("cure") {
+Cure::Cure(): AMateria("cure") {
 	std::cout << GREEN << "Cure Constructed" << RESET << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:13:04 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/16 16:30:18 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 17:24:46 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void newline() {
 	std::cout << std::endl;
-}
-
-void separator() {
-	std::cout << "______________________________________________________________" << std::endl;
 }
 
 void pdf_test() {
@@ -28,7 +24,6 @@ void pdf_test() {
 
 	delete j;
 	delete i;
-	separator();
 }
 
 void array_test() {
@@ -46,7 +41,6 @@ void array_test() {
 	for (int i = 0; i < 9; i++) {
 		delete animals[i];
 	}
-	separator();
 }
 
 // shallow copy:
@@ -67,8 +61,6 @@ void deep_copy_test() {
 	std::cout << "Brain address 2: " << kat2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << kat3.getBrain() << std::endl;
 
-	separator();
-	
 	Dog dawg;
 	newline();
 	Dog dawg2( dawg );
@@ -82,7 +74,6 @@ void deep_copy_test() {
 	std::cout << "Brain address 2: " << dawg2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << dawg3.getBrain() << std::endl;
 
-	separator();
 }
 
 void shallow_copy_test() {
@@ -99,7 +90,6 @@ void shallow_copy_test() {
 	std::cout << "Brain address 2: " << tak2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << tak3.getBrain() << std::endl;
 	
-	separator();
 }
 
 void ex00_tests()
@@ -117,7 +107,7 @@ void ex00_tests()
 		dog->makeSound();
 		delete j;
 		delete dog;
-		separator();
+
 	}	
 	{
 		// Cat Tests
@@ -131,7 +121,7 @@ void ex00_tests()
 
 		delete i;
 		delete cat;
-		separator();
+
 	}
 	{
 		// WrongAnimal Tests
@@ -140,7 +130,7 @@ void ex00_tests()
 		std::cout << wrongAnimal->getType() << " " << std::endl;
 		wrongAnimal->makeSound();
 		delete wrongAnimal;
-		separator();
+
 	}
 	{	
 		// WrongCat Tests
@@ -154,7 +144,7 @@ void ex00_tests()
 
 		delete tac1;
 		delete tac2;
-		separator();
+
 	}
 }
 

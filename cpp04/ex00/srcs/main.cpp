@@ -6,13 +6,13 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:13:04 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/15 21:38:48 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 17:19:23 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.h"
 
-int main()
+void tests()
 {
 	{
 		// Animal Tests
@@ -73,5 +73,10 @@ int main()
 		delete tac2;
 		std::cout << std::endl;
 	}
+}
+
+int main() {
+	tests();
+	system("leaks Animal");
 	return 0;
 }

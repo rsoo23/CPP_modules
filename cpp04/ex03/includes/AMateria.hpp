@@ -6,19 +6,22 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:36:09 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/17 10:51:06 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 13:41:45 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.h"
 
+#pragma once
 #ifndef AMATERIA_HPP
 #define AMATERIA_HPP
+
+class ICharacter;
 
 class AMateria {
 	public:
 		AMateria();
-		AMateria( std::string& const type );
+		AMateria( const std::string& type );
 		AMateria( const AMateria& other );
 		AMateria& operator=( const AMateria& other );
 		virtual ~AMateria();

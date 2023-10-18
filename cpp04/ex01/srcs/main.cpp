@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 10:13:04 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/16 16:26:12 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 17:21:10 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void newline() {
 	std::cout << std::endl;
-}
-
-void separator() {
-	std::cout << "______________________________________________________________" << std::endl;
 }
 
 void pdf_test() {
@@ -28,7 +24,6 @@ void pdf_test() {
 
 	delete j;
 	delete i;
-	separator();
 }
 
 void array_test() {
@@ -46,7 +41,6 @@ void array_test() {
 	for (int i = 0; i < 9; i++) {
 		delete animals[i];
 	}
-	separator();
 }
 
 // shallow copy:
@@ -66,8 +60,6 @@ void deep_copy_test() {
 	std::cout << "Brain address 1: " << kat.getBrain() << std::endl;
 	std::cout << "Brain address 2: " << kat2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << kat3.getBrain() << std::endl;
-
-	separator();
 	
 	Dog dawg;
 	newline();
@@ -82,7 +74,6 @@ void deep_copy_test() {
 	std::cout << "Brain address 2: " << dawg2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << dawg3.getBrain() << std::endl;
 
-	separator();
 }
 
 void shallow_copy_test() {
@@ -99,11 +90,9 @@ void shallow_copy_test() {
 	std::cout << "Brain address 2: " << tak2.getBrain() << std::endl;
 	std::cout << "Brain address 3: " << tak3.getBrain() << std::endl;
 	
-	separator();
 }
 // error: because there are 3 brains being destructed but
 // 	      1 / 3 of was actually malloc-ed 
-
 int main()
 {
 	pdf_test();

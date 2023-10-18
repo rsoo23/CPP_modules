@@ -6,15 +6,16 @@
 #    By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 23:29:57 by rsoo              #+#    #+#              #
-#    Updated: 2023/10/17 11:16:26 by rsoo             ###   ########.fr        #
+#    Updated: 2023/10/18 16:07:57 by rsoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = AMateria
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes/
+# CFLAGS += -fsanitize=address
 
-CPP_FILES = main.cpp AMateria.cpp Cure.cpp Ice.cpp ICharacter.cpp IMateriaSource.cpp Character.cpp MateriaSource.cpp 
+CPP_FILES = main.cpp AMateria.cpp Cure.cpp Ice.cpp Character.cpp MateriaSource.cpp 
 HPP_FILES = *.hpp
 
 INC_DIR = includes

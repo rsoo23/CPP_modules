@@ -6,13 +6,13 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:09:49 by rsoo              #+#    #+#             */
-/*   Updated: 2023/10/17 11:33:18 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/10/18 14:33:01 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.h"
 
-Ice::Ice(): type("ice") {
+Ice::Ice(): AMateria("ice") {
 	std::cout << GREEN << "Ice Constructed" << RESET << std::endl;
 }
 
@@ -38,5 +38,5 @@ AMateria* Ice::clone() const {
 }
 
 void Ice::use( ICharacter& target ) {
-	std::cout << UCYN << "* shoots an ice bolt at " << target.getName() << RESET << std::endl;
+	std::cout << UCYN << "* shoots an ice bolt at " << target.getName() << " *" << RESET << std::endl;
 }
