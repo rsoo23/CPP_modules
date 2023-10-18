@@ -58,17 +58,17 @@ ScavTrap::~ScavTrap() {
 
 void ScavTrap::attack( const std::string& target ) {
 	if (this->_energyPoints == 0) {
-        std::cout << CYAN << this->_name << RESET \
+        std::cout << CYAN << this->_name << "_clap_name" << RESET \
         << " cannot attack " << RED << "(0 energy points left) :(" << RESET << std::endl;
         return ;
     } else if (this->_hitPoints == 0) {
-        std::cout << CYAN << this->_name << RESET \
+        std::cout << CYAN << this->_name << "_clap_name" << RESET \
         << " cannot attack " << RED << "(0 hit points left) :(" << RESET << std::endl;
         return ;
     }
     this->_energyPoints--;
 
-    std::cout << CYAN << this->_name << RESET \
+    std::cout << CYAN << this->_name << "_clap_name" << RESET \
     << " attacks " << PURPLE << target << RESET \
     << " causing " << RED << this->_attackDamage << RESET \
     << " points of damage!" << std::endl;
