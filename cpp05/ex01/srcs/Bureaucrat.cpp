@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:38:44 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/01 11:29:44 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/01 14:52:56 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ Bureaucrat::~Bureaucrat() {
 }
 
 void Bureaucrat::GradeTooHighException() {
-	throw MyException("Warning: Grade is too high");
+	throw MyException("Warning: Bureaucrat grade is too high");
 }
 
 void Bureaucrat::GradeTooLowException() {
-	throw MyException("Warning: Grade is too low");	
+	throw MyException("Warning: Bureaucrat grade is too low");	
 }
 
 const std::string Bureaucrat::getName() const {
@@ -72,7 +72,17 @@ void Bureaucrat::checkGradeRange( int grade ) {
 	}
 }
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {
+void Bureaucrat::signForm( Form &f ) {
+	if (f.getIsSigned() == true) {
+		std::cout << RED << this->_name << " couldn't sign " << f.getName() << " because it is already signed" << RESET << std::endl;
+	} else if (this->_grade <= f.getGradeRequiredToSign()) {
+		f.beSigned(*this);
+	} else {
+		std::cout << RED << this->_name << " couldn't sign " << f.getName() << " because the bureaucrat grade is too low" << RESET << std::endl;
+	}
+}
+
+std::ostream& operator<<( std::ostream& out, const Bureaucrat& b ) {
 	out << CYAN << b.getName() << ", bureaucrat grade " << b.getGrade() << RESET;
 	return (out);
 }

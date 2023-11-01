@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:38:47 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/01 10:45:00 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/01 11:45:55 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150

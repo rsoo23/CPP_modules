@@ -6,7 +6,7 @@
 #    By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:35:43 by rsoo              #+#    #+#              #
-#    Updated: 2023/11/01 09:37:19 by rsoo             ###   ########.fr        #
+#    Updated: 2023/11/01 11:46:16 by rsoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes/
 # CFLAGS += -fsanitize=address
 
-CPP_FILES = main.cpp Bureaucrat.cpp
+CPP_FILES = main.cpp Bureaucrat.cpp Form.cpp
 HPP_FILES = *.hpp
 
 INC_DIR = includes

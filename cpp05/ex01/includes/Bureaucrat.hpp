@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:38:52 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/01 11:12:54 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/01 14:22:57 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
+
+class Form;
 
 class MyException: public std::exception {
 	public:
@@ -46,11 +48,13 @@ class Bureaucrat {
 
 		void checkGradeRange( int grade );
 
+		void signForm( Form &f );
+
 	private:
 		const std::string _name;
 		int _grade;
 };
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
+std::ostream& operator<<( std::ostream& out, const Bureaucrat& b );
 
 #endif
