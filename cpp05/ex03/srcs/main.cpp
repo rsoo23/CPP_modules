@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:37:34 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/01 21:50:43 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/02 10:30:14 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,223 +20,42 @@ void separator() {
 	std::cout << "_________________________________________________________________________________" << std::endl;
 }
 
-void shrubbery_valid_tests() {
-	try {
-		ShrubberyCreationForm randoForm;
-		newline();
-		ShrubberyCreationForm bushForm("Garden");
-		newline();
-		Bureaucrat alpha("Alpha", 1);
-		newline();
-		
-		randoForm.beSigned(alpha);
-		alpha.signForm(bushForm);
-		newline();
+void intern_tests() {
+	Intern rando;
+	newline();
+	AForm* shrubForm;
+	AForm* roboForm;
+	AForm* presForm;
+	AForm* randomForm;
 
-		// execute + executeForm with valid bureaucrat
-		randoForm.execute(alpha);
-		alpha.executeForm(bushForm);
-		newline();
+	shrubForm = rando.makeForm("Shrubbery Creation Form", "Amazon Forest");
+	newline();
+	roboForm = rando.makeForm("Robotomy Request Form", "Terminator");
+	newline();
+	presForm = rando.makeForm("Presidential Pardon Form", "Donald Trump");
+	newline();
+	randomForm = rando.makeForm("Random Form", "Target");
+	newline();
 
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-void unsigned_shrubbery_tests() {
-	ShrubberyCreationForm bushForm("Garden");
-	newline();
-	Bureaucrat alpha("Alpha", 150);
-	newline();
-	// executeForm with unsigned form
-	try {
-		alpha.executeForm(bushForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-	newline();
-	// execute with unsigned form
-	try {
-		bushForm.execute(alpha);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-void weak_bureaucrat_shrubbery_tests() {
-	ShrubberyCreationForm bushForm("Garden");
-	newline();
-	Bureaucrat alpha("Alpha", 1);
-	Bureaucrat beta("Beta", 150);
-	newline();
-	alpha.signForm(bushForm);
-	try {
-		bushForm.execute(beta);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-	try {
-		beta.executeForm(bushForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
+	separator();
+	Bureaucrat gamma("Gamma", 5);
 	
-}
-
-
-void robotomy_valid_tests() {
-	try {
-		RobotomyRequestForm randoForm;
-		newline();
-		RobotomyRequestForm cyborgForm("Cyborg");
-		newline();
-		Bureaucrat alpha("Alpha", 1);
-		newline();
-		
-		randoForm.beSigned(alpha);
-		alpha.signForm(cyborgForm);
-		newline();
-
-		// execute + executeForm with valid bureaucrat
-		randoForm.execute(alpha);
-		alpha.executeForm(cyborgForm);
-		newline();
-
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-void unsigned_robotomy_tests() {
-	RobotomyRequestForm cyborgForm("Cyborg");
+	shrubForm->beSigned(gamma);
+	shrubForm->execute(gamma);
 	newline();
-	Bureaucrat alpha("Alpha", 150);
+	roboForm->beSigned(gamma);
+	roboForm->execute(gamma);
 	newline();
-	// executeForm with unsigned form
-	try {
-		alpha.executeForm(cyborgForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
+	presForm->beSigned(gamma);
+	presForm->execute(gamma);
 	newline();
-	// execute with unsigned form
-	try {
-		cyborgForm.execute(alpha);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
 
-void weak_bureaucrat_robotomy_tests() {
-	RobotomyRequestForm cyborgForm("Cyborg");
-	newline();
-	Bureaucrat alpha("Alpha", 1);
-	Bureaucrat beta("Beta", 150);
-	newline();
-	alpha.signForm(cyborgForm);
-	try {
-		cyborgForm.execute(beta);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-	try {
-		beta.executeForm(cyborgForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-
-void presidential_valid_tests() {
-	try {
-		PresidentialPardonForm randoForm;
-		newline();
-		PresidentialPardonForm obamaForm("Obama");
-		newline();
-		Bureaucrat alpha("Alpha", 1);
-		newline();
-		
-		randoForm.beSigned(alpha);
-		alpha.signForm(obamaForm);
-		newline();
-
-		// execute + executeForm with valid bureaucrat
-		randoForm.execute(alpha);
-		alpha.executeForm(obamaForm);
-		newline();
-
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-void unsigned_presidential_tests() {
-	PresidentialPardonForm obamaForm("Obama");
-	newline();
-	Bureaucrat alpha("Alpha", 150);
-	newline();
-	// executeForm with unsigned form
-	try {
-		alpha.executeForm(obamaForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-	newline();
-	// execute with unsigned form
-	try {
-		obamaForm.execute(alpha);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-}
-
-void weak_bureaucrat_presidential_tests() {
-	PresidentialPardonForm obamaForm("Obama");
-	newline();
-	Bureaucrat alpha("Alpha", 1);
-	Bureaucrat beta("Beta", 150);
-	newline();
-	alpha.signForm(obamaForm);
-	try {
-		obamaForm.execute(beta);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
-	try {
-		beta.executeForm(obamaForm);
-		newline();
-	} catch (std::exception& e) {
-		std::cout << URED << e.what() << RESET << std::endl;
-	}
+	delete shrubForm;
+	delete roboForm;
+	delete presForm;
 }
 
 int main() {
-	// shrubbery_valid_tests();
-	// separator();
-	// unsigned_shrubbery_tests();
-	// separator();
-	// weak_bureaucrat_shrubbery_tests();
-
-	// robotomy_valid_tests();
-	// separator();
-	// unsigned_robotomy_tests();
-	// separator();
-	// weak_bureaucrat_robotomy_tests();
-
-	// presidential_valid_tests();
-	// separator();
-	// unsigned_presidential_tests();
-	// separator();
-	// weak_bureaucrat_presidential_tests();
+	intern_tests();
+	system("leaks Bureaucrat");
 }

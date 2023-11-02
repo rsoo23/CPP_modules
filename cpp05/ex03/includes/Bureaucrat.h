@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:38:47 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/01 20:48:26 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/02 10:04:05 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 #define HIGHEST_GRADE 1
 #define LOWEST_GRADE 150
