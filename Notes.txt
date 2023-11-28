@@ -47,6 +47,7 @@ references and pointers
 		- more flexibility
 		- can be reassigned to point to different objects
 
+______________________________________________________________________________________________________
 floating point numbers
 
 fixed point numbers
@@ -57,6 +58,7 @@ friend function
     - a function that is not a member of a class, but is given access to private 
     and protected members of the class
 
+______________________________________________________________________________________________________
 inheritance rules:
 	- base class: private, public, protected
 
@@ -94,6 +96,7 @@ virtual destructors
 	- ensures both base class and derived class destructors are called
 	- ensure that the destructor of the most derived class is called when deleting a pointer to an object of the base class
 
+______________________________________________________________________________________________________
 subtype polymorphism (run-time polymorphism)
 	- concept that allows you to treat derived classes as their base classes
 
@@ -135,3 +138,84 @@ deep copy
 	  we need to explicitly define the copy constructor and assign dynamic memory as well, if required.
 	  Also, it is required to dynamically allocate memory to the variables in the other constructors,
 	  as well
+
+______________________________________________________________________________________________________
+
+Casting:
+	1. c-style cast
+	explicit casts:
+	2. reintepret cast
+	3. dynamic cast
+	4. static cast
+	5. const cast
+Use of C style casting is discouraged due its many pitfalls. Instead, explicit casts are used for better
+type safety and more readable and maintable code.
+
+1. C-style casting
+	- allows conversion between fundamental data types, user-defined types and pointer types
+	Cons:
+		- lacks type safety: leads to unexpected results, undefined behaviour, doesn't perform
+		runtime checks to ensure the conversion is valid
+		- implicit conversions: conversions between types that are not related to each other (ex. pointer to int)
+		- combining multiple casts: can perform const cast and reintepret cast
+		- hard to spot
+
+2. reintepret cast
+	int value = 42;
+	char *ptr = reintepret_cast<char *>(&value)
+
+	- most dangerous
+	- unsafe type conversion:
+		can perform conversions between unrelated pointer types and pointer to intergral types
+	- bit level conversion:
+		doesn't ensure the conversion is valid,
+	- no type checking
+	- potential undefined behaviour
+	- should be avoided as much as possible
+
+3. dynamic cast
+	- used for polymorphic types: 
+		handles conversions within an inheritance hierarchy of polymorphic classes
+		(a class is considered polymorphic if it has at least one virtual function)
+	- downcasting safety:
+		converts base class pointers / reference to a derived class pointer / reference safely
+	- runtime type checking:
+		ensures conversion is valid, if not it returns a nullptr / throws std::bad_cast exception
+	  	for references
+	- upcasting
+		reverse of downcasting
+		not recommended since static_cast can perform them safely and is more efficient
+	- use with polymorphism:
+		relies on the presence of virtual functions in the class hierarchy to work correctly
+		it uses the virtual table (vtable) to determine the actual type of the object at runtime
+
+4. static cast
+	- numeric casting:
+		allows safe and well-defined conversions between types like int, float, double
+	- pointer and reference conversion:
+		allows upcasting, downcasting and conversions between pointers to related types
+	- no runtime checking
+		relies on programmers knowledge on whether if its safe
+		validity of the conversion is checked in compile time
+	- downcasting limitations:
+		should only be used if you are sure that the derived class object is that of the target type
+		use dynamic_cast if you are not sure
+	- user-defined conversions
+
+5. const cast
+	used to add / remove the const-ness of a variable
+	- safety considerations:
+		removing const-ness and changing a variable might lead to undefined behaviour
+	- adding const-ness:
+		useful when you want to pass a non-const variable into a function that takes in a const
+		reference / pointer
+	- can be used for pointer and reference types
+	- only use it for its purpose and nothing else
+	- it is the safest since it doesn't change any values
+
+static class
+- no direct equivalent of static class like in Java, but we can simulate it:
+	1. only static members
+	2. cannot be instantiated to create objects
+	3. namespace-like organization (serves as a container for grouping related static members)
+	4. optional constructor / destructor (place them in private if defined)
