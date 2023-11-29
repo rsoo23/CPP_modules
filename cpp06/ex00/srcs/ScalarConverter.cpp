@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 23:00:22 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/29 16:45:43 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/30 00:54:02 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ bool correctFloatFormat( std::string input ) {
 
 	if (input[i] == '-')
 		i++;
-	while (isnumber(input[i]))
+	while (isdigit(input[i]))
 		i++;
 	if (input[i] == '.')
 		i++;
-	if (!isnumber(input[i]))
+	if (!isdigit(input[i]))
 		return false;
-	while (isnumber(input[i]))
+	while (isdigit(input[i]))
 		i++;
 	if (input[i] == 'f')
 		i++;
@@ -105,7 +105,7 @@ bool correctDoubleFormat( std::string input ) {
 
 	if (input[i] == '-')
 		i++;
-	while (isnumber(input[i]))
+	while (isdigit(input[i]))
 		i++;
 	if (input[i] == '.')
 		i++;
@@ -113,7 +113,7 @@ bool correctDoubleFormat( std::string input ) {
 		return false;
 	if (input[i] == '\0')
 		return false;
-	while (isnumber(input[i]))
+	while (isdigit(input[i]))
 		i++;
 	if (input[i] == '\0')
 		return true;
@@ -125,7 +125,7 @@ bool correctIntFormat( std::string input ) {
 
 	if (input[i] == '-')
 		i++;
-	while (isnumber(input[i]))
+	while (isdigit(input[i]))
 		i++;
 	if (input[i] == '\0')
 		return true;
@@ -163,12 +163,6 @@ void handleInt( std::string input ) {
 		
 		displayChar(n);
 		displayInt(n);
-
-		// int
-		if (n >= -2147483648 && n < 2147483648)
-			std::cout << UYEL "int: " << static_cast<int>(n) << std::endl;
-		else
-			std::cout << UYEL "int: out of range" << std::endl;
 
 		// float
 		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
@@ -230,7 +224,7 @@ void ScalarConverter::convert( std::string input ) {
             return ;
         }
     }
-	if (strlen(input.c_str()) == 1 && !isnumber((int)((input.c_str())[0]))) {
+	if (strlen(input.c_str()) == 1 && !isdigit((int)((input.c_str())[0]))) {
 		handleCharacters((input.c_str())[0]);
 	} else if (correctFloatFormat(input)) {
 		handleFloat(input);

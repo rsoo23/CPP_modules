@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 23:05:03 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/29 13:35:48 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/30 00:53:33 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string.h>
 #include <cstdlib>
 #include <cctype>
-#include <limits.h>
+#include <limits>
 
 #include "ScalarConverter.hpp"
 
