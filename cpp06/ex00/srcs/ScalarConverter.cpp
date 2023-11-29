@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 23:00:22 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/02 23:00:22 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/29 16:45:43 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ ScalarConverter& ScalarConverter::operator=( const ScalarConverter& other ) {
 
 ScalarConverter::~ScalarConverter() {}
 
-    // std::cout << UCYN "char: " << << RESET << std::endl;
-    // std::cout << UYEL "int: " << << RESET << std::endl;
-    // std::cout << UGRN "float: " << << RESET << std::endl;
-    // std::cout << UPUR "double: " << << RESET << std::endl;
-
-void handlePseudoLiterals( const std::string& input ) {
+void handlePseudoLiterals( std::string input ) {
     std::cout << UCYN "char: impossible" RESET << std::endl;
     std::cout << UYEL "int: impossible" RESET << std::endl;
     if (input == "-inff" || input == "-inf") {
@@ -45,29 +40,188 @@ void handlePseudoLiterals( const std::string& input ) {
     }
 }
 
+void handleCharacters( char c ) {
+	std::cout << UCYN "char: '" << c << "'" << std::endl;
+	std::cout << UYEL "int: " << static_cast<int>(c) << std::endl;
+	std::cout << UGRN "float: " << static_cast<float>(c) << ".0f" << std::endl;
+	std::cout << UPUR "double: " << static_cast<double>(c) << ".0" RESET << std::endl;
+}
+
 /*
-Possible inputs:
-- int
-- char
-- float
-- double
+Accepts:
+- 000.1f
+- .34f
 
-- -inff: imp, imp, -inff, -inf
-- +inff: imp, imp, +inff, +inf
-- nanf: imp, imp, nanf, nan
-
-- -inf: imp, imp, -inff, -inf
-- +inf: imp, imp, +inff, +inf
-- nan: imp, imp, nanf, nan
-
-Erroneous inputs:
-- int, float, double with other symbols
-- multiple char
-- int, float, double out of range
-
+Rejects:
+- 0.f
+- 0.0ff
+- 0-.0f
 */
-void ScalarConverter::convert( const std::string& input ) {
-    // Pseudo literals
+void displayOutOfRange( void ) {
+	std::cout << UCYN "char: non displayable" << std::endl;
+	std::cout << UYEL "int: out of range" << std::endl;
+	std::cout << UGRN "float: out of range" << std::endl;
+	std::cout << UPUR "double: out of range" << std::endl;
+}
+
+void displayChar( double n ) {
+	if (n > 32 && n < 127)
+		std::cout << UCYN "char: '" << static_cast<char>(n) << "'" << std::endl;
+	else
+		std::cout << UCYN "char: non displayable" << std::endl;
+}
+
+void displayInt( double n ) {
+	if (n >= -2147483648 && n < 2147483648)
+		std::cout << UYEL "int: " << static_cast<int>(n) << std::endl;
+	else
+		std::cout << UYEL "int: out of range" << std::endl;
+}
+
+bool correctFloatFormat( std::string input ) {
+	int i = 0;
+
+	if (input[i] == '-')
+		i++;
+	while (isnumber(input[i]))
+		i++;
+	if (input[i] == '.')
+		i++;
+	if (!isnumber(input[i]))
+		return false;
+	while (isnumber(input[i]))
+		i++;
+	if (input[i] == 'f')
+		i++;
+	else
+		return false;
+	if (input[i] == '\0')
+		return true;
+	return false;
+}
+
+bool correctDoubleFormat( std::string input ) {
+	int i = 0;
+
+	if (input[i] == '-')
+		i++;
+	while (isnumber(input[i]))
+		i++;
+	if (input[i] == '.')
+		i++;
+	else
+		return false;
+	if (input[i] == '\0')
+		return false;
+	while (isnumber(input[i]))
+		i++;
+	if (input[i] == '\0')
+		return true;
+	return false;
+}
+
+bool correctIntFormat( std::string input ) {
+	int i = 0;
+
+	if (input[i] == '-')
+		i++;
+	while (isnumber(input[i]))
+		i++;
+	if (input[i] == '\0')
+		return true;
+	return false;
+}
+
+void handleFloat( std::string input ) {
+	try {
+		double n = std::stod(input);
+
+		displayChar(n);
+		displayInt(n);
+
+		// float
+		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
+		{
+			if (n < 1000000 && n > -1000000)
+				std::cout << UGRN "float: " << n << "f" << std::endl;
+			else
+				std::cout << UGRN "float: " << n << std::endl;
+		}
+		else
+			std::cout << UGRN "float: out of range" << std::endl;
+		
+		// double
+		std::cout << UPUR "double: " << n << std::endl;
+	} catch (const std::exception& e) {
+		displayOutOfRange();
+	}
+}
+
+void handleInt( std::string input ) {
+	try {
+		double n = std::stod(input);
+		
+		displayChar(n);
+		displayInt(n);
+
+		// int
+		if (n >= -2147483648 && n < 2147483648)
+			std::cout << UYEL "int: " << static_cast<int>(n) << std::endl;
+		else
+			std::cout << UYEL "int: out of range" << std::endl;
+
+		// float
+		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
+		{
+			if (n < 1000000 && n > -1000000)
+				std::cout << UGRN "float: " << n << ".0f" << std::endl;
+			else
+				std::cout << UGRN "float: " << n << std::endl;
+		}
+		else
+			std::cout << UGRN "float: out of range" << std::endl;
+		
+		// double
+		if (n < 1000000 && n > -1000000)
+			std::cout << UPUR "double: " << n << ".0" << std::endl;
+		else
+			std::cout << UPUR "double: " << n << std::endl;
+	} catch (const std::exception& e) {
+		displayOutOfRange();
+	}
+}
+
+void handleDouble( std::string input ) {
+	try {
+		double n = std::stod(input);
+
+		displayChar(n);
+		displayInt(n);
+
+		// float
+		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
+		{
+			if (n == static_cast<float>(n) && n < 1000000 && n > -1000000)
+				std::cout << UGRN "float: " << static_cast<float>(n) << ".0f" << std::endl;
+			else if (n < 1000000 && n > -1000000)
+				std::cout << UGRN "float: " << n << "f" << std::endl;
+			else
+				std::cout << UGRN "float: " << n << std::endl;
+		}
+		else
+			std::cout << UGRN "float: out of range" << std::endl;
+			
+		// double
+		if (n == static_cast<double>(n) && n < 1000000 && n > -1000000)
+			std::cout << UPUR "double: " << static_cast<double>(n) << ".0" << std::endl;
+		else
+			std::cout << UPUR "double: " << n << std::endl;
+	} catch (const std::exception& e) {
+		displayOutOfRange();
+	}
+}
+
+void ScalarConverter::convert( std::string input ) {
     std::string pseudoLiterals[] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
 
     for (int i = 0; i < 6; i++) {
@@ -76,8 +230,15 @@ void ScalarConverter::convert( const std::string& input ) {
             return ;
         }
     }
-
-    
-
-    // std::cout << UCYN "char: " << atoi(input.c_str()) << RESET << std::endl;
+	if (strlen(input.c_str()) == 1 && !isnumber((int)((input.c_str())[0]))) {
+		handleCharacters((input.c_str())[0]);
+	} else if (correctFloatFormat(input)) {
+		handleFloat(input);
+	} else if (correctDoubleFormat(input)) {
+		handleDouble(input);
+	} else if (correctIntFormat(input)) {
+		handleInt(input);
+	} else {
+		std::cout << RED "Error: Input Format" RESET << std::endl;
+	}
 }
