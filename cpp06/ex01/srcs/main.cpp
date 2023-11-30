@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:03:14 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/28 13:38:43 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/30 12:02:37 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int main() {
 
 	ptr = Serializer::serialize(&man);
 	received = Serializer::deserialize(ptr);
+
+	std::cout << &man << std::endl;
+	std::cout << ptr << std::endl << std::endl;
 
 	std::cout << GREEN << received->name << RESET << std::endl;
 	std::cout << CYAN << received->height << RESET << std::endl;	

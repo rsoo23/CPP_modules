@@ -6,14 +6,14 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:03:18 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/28 13:35:03 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/30 12:05:05 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.h"
 
 #ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 typedef struct Data {
 	std::string name;

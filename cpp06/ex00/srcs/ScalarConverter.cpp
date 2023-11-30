@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 23:00:22 by rsoo              #+#    #+#             */
-/*   Updated: 2023/11/30 00:54:02 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/11/30 11:53:26 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,6 @@ Rejects:
 - 0.0ff
 - 0-.0f
 */
-void displayOutOfRange( void ) {
-	std::cout << UCYN "char: non displayable" << std::endl;
-	std::cout << UYEL "int: out of range" << std::endl;
-	std::cout << UGRN "float: out of range" << std::endl;
-	std::cout << UPUR "double: out of range" << std::endl;
-}
-
-void displayChar( double n ) {
-	if (n > 32 && n < 127)
-		std::cout << UCYN "char: '" << static_cast<char>(n) << "'" << std::endl;
-	else
-		std::cout << UCYN "char: non displayable" << std::endl;
-}
-
-void displayInt( double n ) {
-	if (n >= -2147483648 && n < 2147483648)
-		std::cout << UYEL "int: " << static_cast<int>(n) << std::endl;
-	else
-		std::cout << UYEL "int: out of range" << std::endl;
-}
 
 bool correctFloatFormat( std::string input ) {
 	int i = 0;
@@ -132,84 +112,63 @@ bool correctIntFormat( std::string input ) {
 	return false;
 }
 
-void handleFloat( std::string input ) {
-	try {
-		double n = std::stod(input);
-
-		displayChar(n);
-		displayInt(n);
-
-		// float
-		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
-		{
-			if (n < 1000000 && n > -1000000)
-				std::cout << UGRN "float: " << n << "f" << std::endl;
-			else
-				std::cout << UGRN "float: " << n << std::endl;
-		}
-		else
-			std::cout << UGRN "float: out of range" << std::endl;
-		
-		// double
-		std::cout << UPUR "double: " << n << std::endl;
-	} catch (const std::exception& e) {
-		displayOutOfRange();
-	}
+void displayOutOfRange( void ) {
+	std::cout << UCYN "char: non displayable" << std::endl;
+	std::cout << UYEL "int: out of range" << std::endl;
+	std::cout << UGRN "float: out of range" << std::endl;
+	std::cout << UPUR "double: out of range" << std::endl;
 }
 
-void handleInt( std::string input ) {
-	try {
-		double n = std::stod(input);
-		
-		displayChar(n);
-		displayInt(n);
+void displayChar( double n ) {
+	if (n > 32 && n < 127)
+		std::cout << UCYN "char: '" << static_cast<char>(n) << "'" << std::endl;
+	else
+		std::cout << UCYN "char: non displayable" << std::endl;
+}
 
-		// float
-		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
-		{
-			if (n < 1000000 && n > -1000000)
-				std::cout << UGRN "float: " << n << ".0f" << std::endl;
-			else
-				std::cout << UGRN "float: " << n << std::endl;
-		}
-		else
-			std::cout << UGRN "float: out of range" << std::endl;
-		
-		// double
+void displayInt( double n ) {
+	if (n >= -2147483648 && n < 2147483648)
+		std::cout << UYEL "int: " << static_cast<int>(n) << std::endl;
+	else
+		std::cout << UYEL "int: out of range" << std::endl;
+}
+
+void displayFloat( double n ) {
+	if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
+	{
 		if (n < 1000000 && n > -1000000)
-			std::cout << UPUR "double: " << n << ".0" << std::endl;
+		{
+			if (static_cast<float>(n) == static_cast<float>(std::floor(n)))
+				std::cout << UGRN "float: " << static_cast<float>(n) << ".0f" << std::endl;
+			else
+				std::cout << UGRN "float: " << static_cast<float>(n) << "f" << std::endl;
+		}
+		else if (!(n < 1000000 && n > -1000000))
+			std::cout << UGRN "float: " << static_cast<float>(n) << "f" << std::endl;
 		else
-			std::cout << UPUR "double: " << n << std::endl;
-	} catch (const std::exception& e) {
-		displayOutOfRange();
+			std::cout << UGRN "float: " << static_cast<float>(n) << std::endl;
 	}
+	else
+		std::cout << UGRN "float: out of range" << std::endl;
 }
 
-void handleDouble( std::string input ) {
+void displayDouble( double n ) {
+	// the last condition checks if a double has a fractional part (e.g. 42.2) or not (e.g. 42.0)
+	if (n < 1000000 && n > -1000000 && static_cast<double>(n) == static_cast<double>(std::floor(n))) {
+		std::cout << UPUR "double: " << n << ".0" << std::endl;
+		return ;
+	}
+	std::cout << UPUR "double: " << n << std::endl;
+}
+
+void handleNumbers( std::string input ) {
 	try {
 		double n = std::stod(input);
 
 		displayChar(n);
 		displayInt(n);
-
-		// float
-		if (n >= std::numeric_limits<float>::lowest() && n < std::numeric_limits<float>::max())
-		{
-			if (n == static_cast<float>(n) && n < 1000000 && n > -1000000)
-				std::cout << UGRN "float: " << static_cast<float>(n) << ".0f" << std::endl;
-			else if (n < 1000000 && n > -1000000)
-				std::cout << UGRN "float: " << n << "f" << std::endl;
-			else
-				std::cout << UGRN "float: " << n << std::endl;
-		}
-		else
-			std::cout << UGRN "float: out of range" << std::endl;
-			
-		// double
-		if (n == static_cast<double>(n) && n < 1000000 && n > -1000000)
-			std::cout << UPUR "double: " << static_cast<double>(n) << ".0" << std::endl;
-		else
-			std::cout << UPUR "double: " << n << std::endl;
+		displayFloat(n);
+		displayDouble(n);
 	} catch (const std::exception& e) {
 		displayOutOfRange();
 	}
@@ -226,12 +185,8 @@ void ScalarConverter::convert( std::string input ) {
     }
 	if (strlen(input.c_str()) == 1 && !isdigit((int)((input.c_str())[0]))) {
 		handleCharacters((input.c_str())[0]);
-	} else if (correctFloatFormat(input)) {
-		handleFloat(input);
-	} else if (correctDoubleFormat(input)) {
-		handleDouble(input);
-	} else if (correctIntFormat(input)) {
-		handleInt(input);
+	} else if (correctFloatFormat(input) || correctDoubleFormat(input) || correctIntFormat(input)) {
+		handleNumbers(input);
 	} else {
 		std::cout << RED "Error: Input Format" RESET << std::endl;
 	}
