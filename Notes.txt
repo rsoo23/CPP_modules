@@ -219,3 +219,58 @@ static class
 	2. cannot be instantiated to create objects
 	3. namespace-like organization (serves as a container for grouping related static members)
 	4. optional constructor / destructor (place them in private if defined)
+
+______________________________________________________________________________________________________
+
+function templates
+class templates
+
+iterators:
+1. input
+	- supports reading values from a sequence
+	- single pass traversal
+	- ex: std::vector<int>::iterator it = numbers.begin()
+
+2. output
+	- supports writing values to a sequence
+	- single pass traversal	
+	- ex: std::vector<int>::iterator it = std::back_inserter(outputNumbers)
+	  (where outputNumbers is a vector<int>)
+
+3. forward
+	- contain all features in prev two
+	- can only move forward (incrementing)
+	- ex: std::forward_list<int>::iterator it = numbers.begin()
+	      it++
+
+4. bidirectional
+	- contain all features in forward iterators
+	- can move in both directions (incrementing and decrementing)
+	- ex: std::list<int>::iterator it = numbers.begin()
+	      it++, it--
+
+5. random access
+	- can randomly access any element inside the container
+	- behaves like a pointer
+	- pointer aritmethic operations
+	- ex: std::vector<int>::iterator it = numbers.begin()
+	      *it, *(it + 2), it++, it--
+
+containers:
+1. sequence
+	- implement data structures that are accessed sequentially
+	- array, vector, deque, forward_list, list
+
+2. associative
+	- implement sorted data structures that can be quickly searched
+	  with (Ologn complexity)
+	- set, map, multiset, multimap
+
+3. unordered associative
+	- implement unsorted (hashed) data structures that can be quickly searched 
+	(O(1) amortized, O(n) worst-case complexity)
+	- unordered ~ (same as associative)
+
+4. container adapters
+	- provide a different interface for sequential containers
+	- stack, queue, priority_queue
