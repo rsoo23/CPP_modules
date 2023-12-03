@@ -114,5 +114,5 @@ int main() {
     // add_beyond_capacity_test();
     // uint_limit_test();
     // int_limit_test();
-    // random_num_test(-10000, 10000, 20000);
+    random_num_test(-10000, 10000, 20);
 }
