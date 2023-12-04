@@ -20,14 +20,14 @@ class MutantStack: public std::stack<T> {
         MutantStack(): std::stack<T>() {};
         MutantStack( const MutantStack& other ): std::stack<T>(other) {};
         MutantStack& operator=( const MutantStack& other ) { if (this != other) {*this = other;} return *this; };
-        ~MutantStack();
+		~MutantStack() {};
 
         // accesses std::stack's underlying container's iterator
-        typedef typename std::stack<T>::container::iterator stackIterator;
+        typedef typename std::stack<T>::container_type::iterator iterator;
 
         // std::stack has a member called 'c' which is its underlying container
-        stackIterator begin() { return _stack.c.begin(); };
-        stackIterator end() { return _stack.c.end(); };
+        iterator begin() { return this->c.begin(); };
+        iterator end() { return this->c.end(); };
 
     private:
        std::stack<T> _stack;
