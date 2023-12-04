@@ -11,6 +11,51 @@
 /* ************************************************************************** */
 
 #include "Array.h"
+#define MAX_VAL 750
+
+void subject_provided_test() {
+	// check to see if the implemented Array behaves the same as a standard array
+	Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+	// assigns random values to the arrays
+    for (int i = 0; i < MAX_VAL; i++) {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    // tests if the copy and copy assign constructors work
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
+	// tests if all the elements in both arrays are equivalent
+    for (int i = 0; i < MAX_VAL; i++) {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return ;
+        }
+    }
+	// out of range tests
+    try {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+    try {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    for (int i = 0; i < MAX_VAL; i++) {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
+}
 
 void empty_array_test() {
     try {
@@ -139,6 +184,7 @@ void complex_type_test() {
 }
 
 int main() {
+	subject_provided_test();
     // empty_array_test();
     // sized_array_test();
     // copy_test();
