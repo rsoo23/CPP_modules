@@ -19,7 +19,7 @@ class MutantStack: public std::stack<T> {
     public:
         MutantStack(): std::stack<T>() {};
         MutantStack( const MutantStack& other ): std::stack<T>(other) {};
-        MutantStack& operator=( const MutantStack& other ) { if (this != other) {*this = other;} return *this; };
+        MutantStack& operator=( const MutantStack& other ) { if (this != &other) {*this = other;} return *this; };
 		~MutantStack() {};
 
         // accesses std::stack's underlying container's iterator
