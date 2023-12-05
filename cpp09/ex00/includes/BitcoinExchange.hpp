@@ -23,7 +23,13 @@ class BitcoinExchange {
 
 		void parse_csv_file( const std::string& csv_file_path );
 		void parse_input_file( char* infile_name );
+		bool check_line_format( const std::string& line );
+		bool check_valid_date( const std::string& date );
+		bool check_valid_val( const std::string& val );
 
     private:
        std::unordered_map<std::string, double> _btcDataMap;
+	   float _value;
+	   std::string _date;
+	   int _daysInMonth[12];
 };
