@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:16:28 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/06 17:41:31 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/06 17:54:20 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ BitcoinExchange::BitcoinExchange() {
 	_daysInMonth[9] = 31; 
 	_daysInMonth[10] = 30; 
 	_daysInMonth[11] = 31;
-	_lineNum = 2;
 }
 
 BitcoinExchange::BitcoinExchange( const BitcoinExchange& other ) {
@@ -85,7 +84,7 @@ void BitcoinExchange::parse_input_file( char* infile_name ) {
 		if (line == "date | value")
 			continue;
 		if (!check_line_format(line)) {
-			std::cerr << URED << _lineNum++ << ": bad input => " << line << RESET << std::endl;
+			std::cerr << URED "Error: bad input => " << line << RESET << std::endl;
 			continue;
 		}
 		// finds index of '|'
@@ -95,10 +94,10 @@ void BitcoinExchange::parse_input_file( char* infile_name ) {
 		std::string val = line.substr(barPos + 2);
 		// if both format checks pass then output calculation
 		if (check_valid_date(date) && check_valid_val(val)) {
-			std::map<std::string, float>::iterator it = _btcDataMap.lower_bound(date);
-			float res = it->second * _value;
+			// find_date_lower_bound(&date);
+			float res = _btcDataMap[date] * _value;
 
-			std::cout << std::setprecision(3) << GREEN << _lineNum++ << ": " << date << " => " << it->second << " * " << val << " = " << res << std::endl;
+			std::cout << std::setprecision(3) << GREEN << date << " => " << _btcDataMap[date] << " * " << val << " = " << res << std::endl;
 		}
 	}
 }
@@ -146,7 +145,6 @@ bool BitcoinExchange::check_line_format( const std::string& line ) {
 	return true;
 }
 
-// checks if the year, month and day is all within correct ranges
 bool BitcoinExchange::check_valid_date( const std::string& date ) {
 	std::size_t firstDashPos = date.find('-');
 	std::size_t lastDashPos = date.rfind('-');
@@ -157,26 +155,25 @@ bool BitcoinExchange::check_valid_date( const std::string& date ) {
 	int day = std::stoi(date.substr(lastDashPos + 1));
 	
 	if (year < 2009 || year > 2022) {
-		std::cerr << URED << _lineNum++ << ": year (" << year << ") is out of range [2009, 2022]" << RESET << std::endl;
+		std::cerr << URED "Error: year (" << year << ") is out of range [2009, 2022]" << RESET << std::endl;
 		return false;
 	} else if (month < 1 || month > 12) {
-		std::cerr << URED << _lineNum++ << ": month (" << month << ") is out of range [1, 12]" << RESET << std::endl;
+		std::cerr << URED "Error: month (" << month << ") is out of range [1, 12]" << RESET << std::endl;
 		return false;
 	} else if (day < 1 || day > _daysInMonth[month - 1]) {
 		if (month == 2 && year % 4 == 0 && day == 29)
 			return true;
-		std::cerr << URED << _lineNum++ << ": day (" << day << ") is out of range [1, " << _daysInMonth[month - 1] << "]" << RESET << std::endl;
+		std::cerr << URED "Error: day (" << day << ") is out of range [1, " << _daysInMonth[month - 1] << "]" << RESET << std::endl;
 		return false;
 	}
 	return true;
 }
 
-// checks if the value is within range
 bool BitcoinExchange::check_valid_val( const std::string& val ) {
 	_value = std::stof(val);
 
 	if (_value < 0 || _value > 1000) {
-		std::cerr << URED << _lineNum++ << ": value (" << _value << ") is out of range [0, 1000]" << RESET << std::endl;
+		std::cerr << URED "Error: value (" << _value << ") is out of range [0, 1000]" << RESET << std::endl;
 		return false;
 	}
 	return true;
