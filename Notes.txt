@@ -226,6 +226,19 @@ function templates
 class templates
 
 iterators:
+purpose:
+	- abstraction: 
+		hides the details of how the container is implemented, allows generic algs that works with different
+		containers without needing to know the internal structure
+	- uniform interface: 
+		provides a generic way to traverse through the container, makes it easier to write generic algs that 
+		work with any container that support iterators
+	- compatibility:
+		allows standard algs to be applied to different types of containers, since iterators standardise the 
+		iteration of elements
+	- different types of iterators:
+		example below
+
 1. input
 	- supports reading values from a sequence
 	- single pass traversal

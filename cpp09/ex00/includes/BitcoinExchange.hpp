@@ -28,8 +28,9 @@ class BitcoinExchange {
 		bool check_valid_val( const std::string& val );
 
     private:
-       std::unordered_map<std::string, double> _btcDataMap;
+       std::map<std::string, float> _btcDataMap;
 	   float _value;
 	   std::string _date;
 	   int _daysInMonth[12];
+	   int _lineNum;
 };
