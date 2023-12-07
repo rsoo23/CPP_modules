@@ -287,3 +287,11 @@ containers:
 4. container adapters
 	- provide a different interface for sequential containers
 	- stack, queue, priority_queue
+
+______________________________________________________________________________________________________
+
+sorts:
+	merge: break into halves recursively, join and sort
+	insertion: swap until sorted
+	selection: find minimum, then swap
+	quick: pivoting
