@@ -295,3 +295,181 @@ sorts:
 	insertion: swap until sorted
 	selection: find minimum, then swap
 	quick: pivoting
+
+container adapters:
+	- not full container classes
+	- they are classes that provide a specific interface relying on an object of one of the container
+	  classes (such as deque or list) to handle the elements
+	- the underlying container is encapsulated in such a way that its elements are accessed by the 
+	  members of the container adaptor independently of the underlying container class used
+
+container properties:
+	sequence
+		- elements are ordered in a strict linear sequence; they are accessed by their position in the sequence
+
+	contiguous storage
+		- elements are stored in contiguous memory locations, allowing constant time random access to elements
+		- pointers to an element can be offset to access other elements
+		(contiguous: blocks of memory are located next to each other, without gaps / spaces in between)
+
+	fixed-size aggregate
+		- uses implicit constructors and destructors to allocate the required space statically
+		- size is compile-time constant, no memory / time overhead
+
+	dynamic array
+		- allows direct access to any element in the sequence, even through pointer arithmetics
+		- provides fast addition / removal of elements at the end of the sequence
+	
+	allocator-aware
+		- uses an allocator object to dynamically handle its storage needs
+	
+	linked list
+		- each element keeps information on how to locate the next element, allowing constant time insert and 
+		erase operations after a specific element / entire ranges, but no direct random access
+		(direct random access: immediately retrieving an element at an index / position without needing to traverse
+		from the beginning)
+	
+	doubly-linked list
+		- (same as linked list but with info on how to locate the previous and next element)
+	
+	associative
+		- elements are referenced by theri key and not their absolute position
+	
+	ordered
+		- elements follow a strict order at all times, all inserted elements are given a position in this order
+	
+	unordered
+		- elements are organized using hash tables that allow for fast access to elements by their key
+
+	set
+		- the value of an element is also the key used to identify it
+
+	map
+		- each element associates a key to a mapped value, keys are meant to identify the elements whose main content
+		is the mapped value
+
+	unique keys
+		- no two elements in the container can have equivalent keys
+	
+	multiple equivalent keys
+		- multiple elements can have equivalent keys
+	
+
+
+
+array: sequence, contiguous storage, fixed-size aggregate
+	cons:
+	- cannot be expanded / contracted dynamically
+
+vector: sequence, dynamic array, allocator-aware
+	facts: 
+	- to add / remove elements, vector does not reallocate memory since it is relatively expensive in terms of 
+	processing time
+	- instead, it may allocate some extra storage to accommodate for possible growth
+	- Libraries can implement different strategies for growth to balance between memory usage and reallocations, 
+	but in any case, reallocations should only happen at logarithmically growing intervals of size so that the 
+	insertion of individual elements at the end of the vector can be provided with amortized constant time complexity
+	(amortized: considers the overall performance of a sequence of operations rather than focusing 
+	on the worst-case scenario for a single operation)
+	
+	pros:
+	- efficient: accessing elements, adding / removing elements from its end
+	
+	cons:
+	- not efficient: operations that do not involve the end, less consistent iterators and references than lists and 
+	forward lists
+
+deque: sequence, dynamic array, allocator-aware
+	facts:
+	- unlike vectors, elements are not guaranteed to be stored in contiguous storage locations, accessing elements by
+	offsetting a pointer to another element causes undefined behaviour
+	- although vectors and deques provide a very similar interface, both work in different ways: the elements of a deque
+	can be scattered in different chunks of storage with the container keeping the necessary information internally to 
+	provide direct access to any of its elements in constant time and with a uniform sequential interface (through iterators)
+
+	pros:
+	- have dynamic sizes and can be expanded / contracted on both ends efficiently
+	
+	cons:
+	- non efficient: frequent insertion / removal at positions other than the beginning / end and have less consistent
+	iterators and references than lists and forward lists
+
+forward_list: sequence, linked list, allocator-aware
+	facts:
+	- singly linked list: can store each of the elements in unrelated storage locations
+	- less overhead insert / erase compared to lists since lists store two links, taking up more storage, but are able to efficiently
+	iterate forwards and backwards
+
+	pros:
+	- constant time insert / erase anywhere in the sequence
+	- perform generally better in inserting / extracting / moving elements compared to array, vector, deques and are used extensively
+	in sorting algorithms
+
+	cons:
+	- lack direct access, takes linear time to iterate from beginning
+	- extra memory to store linking info
+
+list: sequence, doubly-linked list, allocator-aware
+	- same as forward_list, but keeps track of prev and next
+
+
+stack: container adaptor
+	- LIFO
+	- the underlying conatiner may be any of the standard container class templates / some spefically designed container class
+	- the container shall support: empty, size, back, push_back, pop_back
+	- vector, deque, list fulfill the requirements
+	- by default, the standard container deque is used, if no container class is specified for a particular stack class instantiation
+
+queue: container adaptor
+	- FIFO
+	- ~
+	- the container shall support: empty, size, front, back, push_back, pop_front
+	- deque, list fulfill the requirements
+	- ~
+
+set: associative, ordered, set, unique keys, allocator-aware
+	facts:
+	- value of the elements in a set cannot be modified (elements are always const), but can be inserted / removed
+	- elements are sorted following a specific strict weak ordering criterion indicated by its internal comparison object
+	- implemented as binary search tree
+
+	pros:
+	- allow the direct iteration on subsets based on their order
+
+	cons:
+	- slower than unordered set to access individual elements by key
+
+multiset: associative, ordered, set, multiple equivalent keys, allocator-aware
+	- same as set, but allows duplicates
+
+unordered_set: associative, unordered, set, unique keys, allocator-aware
+	facts:
+	- value of the elements in a set cannot be modified (elements are always const), but can be inserted / removed
+	- not sorted in any particular order, but organized into buckets depending on their hash values (with a constant average time complexity on average)
+
+	pros:
+	- faster individual element access
+
+	cons:
+	- less efficient for range iteration through a subset of their elements
+
+ 
+unordered_multiset: associative, unordered, set, multiple equivalent keys, allocator-aware
+	- same as unordered_set, but allows duplicates
+	
+	facts:
+	- iterators in the container are at least forward iterators
+	- shares header with <unordered_set>
+
+map: associative, ordered, map, unique keys, allocator-aware
+	- same as set, but with mapping property
+
+multimap: associative, ordered, map, multiple equivalent keys, allocator-aware
+	- same as multiset, but with mapping property
+
+unordered_map: associative, unordered, map, unique keys, allocator-aware
+	- same as unordered_set, but with mapping property
+
+unordered_multimap: associative, unordered, map, multiple equivalent keys, allocator-aware
+	- same as unordered_set, but with mapping property
+
