@@ -13,12 +13,30 @@
 #include "PmergeMe.h"
 
 int main(int ac, char **av) {
-		(void)av;
-	if (ac > 1) {
+	if (ac < 2) {
+		std::cout << URED << "Argument error: please provide a positive integer sequence\nExample: ./PmergeMe 3 2 5 1" << RESET << std::endl;
+		return 1;
+	}
+		
+	try {
 		PmergeMe p;
 
-		p.sort();
-	} else {
-		std::cout << URED << "Argument error: please provide a positive integer sequence\nExample: ./PmergeMe 3 2 5 1" << RESET << std::endl;
+		p.assignInputToContainers(ac, av);
+		p.checkDuplicates();
+		p.checkSorted();
+
+		p.startClock();
+		p.fordJohnsonAlgorithm(p.getVec());
+		p.stopClock();
+		p.calculateDuration("vec");
+
+		p.startClock();
+		p.fordJohnsonAlgorithm(p.getLst());
+		p.stopClock();
+		p.calculateDuration("lst");
+
+		p.printOutput( av );
+	} catch (std::exception const& e) {
+		std::cout << URED << e.what() << RESET << std::endl;
 	}
 }

@@ -17,6 +17,9 @@
 #include <algorithm>
 #include <string>
 #include <exception>
+#include <vector>
+#include <list>
+#include <sys/time.h>
 
 #define RED 	"\e[0;31m"
 #define GREEN 	"\e[0;32m"

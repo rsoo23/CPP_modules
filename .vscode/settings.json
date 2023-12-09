@@ -84,6 +84,7 @@
 		"xtr1common": "cpp",
 		"xutility": "cpp",
 		"__tree": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"xtree": "cpp"
 	}
 }

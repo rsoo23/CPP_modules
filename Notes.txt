@@ -355,8 +355,6 @@ container properties:
 		- multiple elements can have equivalent keys
 	
 
-
-
 array: sequence, contiguous storage, fixed-size aggregate
 	cons:
 	- cannot be expanded / contracted dynamically
