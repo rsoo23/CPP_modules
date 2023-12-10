@@ -26,14 +26,14 @@ int main(int ac, char **av) {
 		p.checkSorted();
 
 		p.startClock();
-		usleep(10000);
-		p.fordJohnsonAlgorithm(p.getVec());
+		// usleep(10000);
+		p.fordJohnsonAlgorithmVec();
 		p.stopClock();
 		p.calculateDuration("vec");
 
 		p.startClock();
-		usleep(10000);
-		p.fordJohnsonAlgorithm(p.getLst()); 
+		// usleep(10000);
+		p.fordJohnsonAlgorithmLst(); 
 		p.stopClock();
 		p.calculateDuration("lst");
 

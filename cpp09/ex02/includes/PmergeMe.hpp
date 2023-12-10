@@ -21,8 +21,20 @@ class PmergeMe {
         PmergeMe& operator=( const PmergeMe& other );
 		~PmergeMe();
 
-        template <typename container>
-        void fordJohnsonAlgorithm( container c );
+        void fordJohnsonAlgorithmVec();
+        void fordJohnsonAlgorithmLst();
+
+        template <typename P, typename T>
+        void getPairs( P& pairs, const T& container );
+
+        template <typename P>
+        void insertionSortPairs( P& pairs );
+
+        template <typename P>
+        void mergeSort( P& pairs );
+
+        template <typename T>
+        void insertOddRemainder( T& container, int oddRemainder );
 
         // time
         void startClock();
@@ -36,12 +48,10 @@ class PmergeMe {
 
         // printing
         void printOutput( char **av );
-        template <typename container>
-        void printContainerElements( container& c, const std::string& containerName );
-
-        // getters
-        std::vector<int>& getVec();
-        std::list<int>& getLst();
+        template <typename T>
+        void printContainerElements( T& container, const std::string& containerName );
+        template <typename P>
+        void printPairs( P& pairs );
 		
         // exceptions
         class inputHasDuplicate: public std::exception {
@@ -74,8 +84,3 @@ class PmergeMe {
 
 };
 
-template <typename container>
-void PmergeMe::fordJohnsonAlgorithm( container c ) {
-	c.push_back(3);
-	return ;
-}
