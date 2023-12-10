@@ -22,7 +22,7 @@ class PmergeMe {
 		~PmergeMe();
 
         template <typename container>
-        void fordJohnsonAlgorithm( container& c );
+        void fordJohnsonAlgorithm( container c );
 
         // time
         void startClock();
@@ -73,3 +73,9 @@ class PmergeMe {
         int _lstSortDuration;
 
 };
+
+template <typename container>
+void PmergeMe::fordJohnsonAlgorithm( container c ) {
+	c.push_back(3);
+	return ;
+}

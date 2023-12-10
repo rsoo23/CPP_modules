@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:43:21 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/10 00:42:40 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/10 12:24:36 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ PmergeMe& PmergeMe::operator=( const PmergeMe& other ) {
 }
 
 PmergeMe::~PmergeMe() {}
-
-template <typename container>
-void PmergeMe::fordJohnsonAlgorithm( container& c ) {
-	(void)c;
-	return ;
-}
 
 void PmergeMe::startClock() {
 	gettimeofday(&_startTime, NULL);
@@ -49,7 +43,7 @@ void PmergeMe::calculateDuration( const std::string& containerName ) {
 
 void PmergeMe::printOutput( char **av ) {
 	int i = 1;
-	std::cout << CYAN << "Unsorted Input Sequence:";
+	std::cout << CYAN << "Unsorted Input Sequence: ";
 	while (av[i])
 		std::cout << av[i++] << " ";
 	std::cout << std::endl;
@@ -57,6 +51,10 @@ void PmergeMe::printOutput( char **av ) {
 	// print the sorted elements in the containers:
 	printContainerElements(_vec, "Vector");
 	printContainerElements(_lst, "List");
+	
+	// print the durations
+	std::cout << PURPLE "Time taken for std::vector: " << _vecSortDuration << " μs" << std::endl;
+	std::cout << "Time taken for std::list: " << _lstSortDuration << " μs" << RESET << std::endl;
 }
 
 template <typename container>

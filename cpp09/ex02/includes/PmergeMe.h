@@ -20,6 +20,7 @@
 #include <vector>
 #include <list>
 #include <sys/time.h>
+#include <unistd.h>
 
 #define RED 	"\e[0;31m"
 #define GREEN 	"\e[0;32m"
