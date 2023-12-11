@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:43:21 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/10 20:48:53 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/12 00:33:25 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,64 +26,51 @@ PmergeMe& PmergeMe::operator=( const PmergeMe& other ) {
 PmergeMe::~PmergeMe() {}
 
 void PmergeMe::fordJohnsonAlgorithmVec() {
-	// if there is an odd number of elements, store the last element in oddRemainder
-    bool isOdd = (_vec.size() % 2 == 0) ? false : true;
-    int oddRemainder = 0;
+    int unpairedRemainder = -1;
 
-    if (isOdd) {
-        oddRemainder = _vec.back();
+	// if there is an odd number of elements, store the last element in unpairedRemainder
+    if (_vec.size() % 2 != 0) {
+        unpairedRemainder = _vec.back();
         _vec.pop_back();
     }
-    (void)oddRemainder;
 
     // store all the values in a vector of pairs
 	std::vector< std::pair<int, int> > pairs;
 	getPairs(pairs, _vec);
-	std::cout << std::endl << "Grouped Pairs: " << std::endl;
-	printPairs(pairs);
-
-    // execute insertion sort based on second value in the pair
-	insertionSortPairs(pairs);
-	std::cout << std::endl << "Sorted Pairs: " << std::endl;
-	printPairs(pairs);
-
-    // merge sort
-	mergeSort< std::vector<int> >(pairs);
-
-    // if odd, find the lower bound, and either insert / push back oddRemainder
-	if (isOdd) {
-		insertOddRemainder(_vec, oddRemainder);
-	}
-}
-
-void PmergeMe::fordJohnsonAlgorithmLst() {
-	// if there is an odd number of elements, store the last element in oddRemainder
-    bool isOdd = (_lst.size() % 2 == 0) ? false : true;
-    int oddRemainder = 0;
-
-    if (isOdd) {
-        oddRemainder = _lst.back();
-        _lst.pop_back();
-    }
-    (void)oddRemainder;
-
-    // store all the values in a vector of pairs
-	std::vector< std::pair<int, int> > pairs;
-	getPairs(pairs, _lst);
 	// std::cout << std::endl << "Grouped Pairs: " << std::endl;
 	// printPairs(pairs);
 
-    // execute insertion sort based on second value in the pair
-	insertionSortPairs(pairs);
+    // sort pairs based on second value in the pair
+	sortPairs(pairs);
 	// std::cout << std::endl << "Sorted Pairs: " << std::endl;
 	// printPairs(pairs);
 
-    // merge sort
+    // split the pairs into two vectors: first values -> pend, second values -> main chain (_vec)
+	sortIntoMainChain(_vec, pairs, unpairedRemainder);
+}
 
-    // if odd, find the lower bound, and either insert / push back oddRemainder
-	if (isOdd) {
-		insertOddRemainder(_lst, oddRemainder);
-	}
+void PmergeMe::fordJohnsonAlgorithmLst() {
+    int unpairedRemainder = -1;
+
+	// if there is an odd number of elements, store the last element in unpairedRemainder
+    if (_lst.size() % 2 != 0) {
+        unpairedRemainder = _lst.back();
+        _lst.pop_back();
+    }
+
+    // store all the values in a vector of pairs
+	std::list< std::pair<int, int> > pairs;
+	getPairs(pairs, _lst);
+	std::cout << std::endl << "Grouped Pairs: " << std::endl;
+	printPairs(pairs);
+
+    // sort pairs based on second value in the pair
+	sortPairs(pairs);
+	std::cout << std::endl << "Sorted Pairs: " << std::endl;
+	printPairs(pairs);
+
+    // split the pairs into two vectors: first values -> pend, second values -> main chain (_vec)
+	sortIntoMainChain(_lst, pairs, unpairedRemainder);
 }
 
 template <typename P, typename T>
@@ -108,7 +95,7 @@ void PmergeMe::getPairs( P& pairs, const T& container ) {
 }
 
 template <typename P>
-void PmergeMe::insertionSortPairs( P& pairs ) {
+void PmergeMe::sortPairs( P& pairs ) {
 	typename P::iterator curr = pairs.begin();
 	typename P::iterator temp1;
 	typename P::iterator temp2;
@@ -129,16 +116,32 @@ void PmergeMe::insertionSortPairs( P& pairs ) {
 	}
 }
 
-template <typename P>
-void PmergeMe::mergeSort( P& pairs ) {
-	std::
-}
-
-template <typename T>
-void PmergeMe::insertOddRemainder( T& container, int oddRemainder ) {
-	typename T::iterator it = std::lower_bound(container.begin(), container.end(), oddRemainder);
-
-	container.insert(it, oddRemainder);
+template <typename T, typename P>
+void PmergeMe::sortIntoMainChain( T& container, P& pairs, int unpairedRemainder ) {
+	typename P::iterator it = pairs.begin();
+	T pend;
+	
+	// clear the container, so that it can act as the main chain
+	// push all the pairs' first values into pend, and the second values into main chain (container)
+	container.clear();
+	while (it != pairs.end()) {
+		pend.push_back(it->first);
+		container.push_back(it->second);
+		it++;
+	}
+	// add the unpairedRemainder to pend if it exists
+	if (unpairedRemainder != -1) {
+		pend.push_back(unpairedRemainder);
+	}
+	// printContainerElements(pend, "pend");
+	// printContainerElements(container, "container");
+	
+	// insert values from pend one by one into the main chain (container) by using lower_bound
+	typename T::iterator pend_it = pend.begin();
+	while (pend_it != pend.end()) {
+		container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
+		pend_it++;
+	}
 }
 
 // time

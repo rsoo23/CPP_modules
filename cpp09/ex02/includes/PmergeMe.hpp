@@ -28,13 +28,10 @@ class PmergeMe {
         void getPairs( P& pairs, const T& container );
 
         template <typename P>
-        void insertionSortPairs( P& pairs );
+        void sortPairs( P& pairs );
 
-        template <typename P>
-        void mergeSort( P& pairs );
-
-        template <typename T>
-        void insertOddRemainder( T& container, int oddRemainder );
+        template <typename T, typename P>
+        void sortIntoMainChain( T& container, P& pairs, int unpairedRemainder );
 
         // time
         void startClock();
@@ -83,4 +80,3 @@ class PmergeMe {
         int _lstSortDuration;
 
 };
-
