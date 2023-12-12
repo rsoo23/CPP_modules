@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:16:28 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/07 23:37:21 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/12 15:02:40 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void RPN::calculate( const std::string& expr ) {
 				std::cout << PURPLE "pushed: " << _stack.top() << RESET << std::endl;
 				i += 2;
 			}
+			if (i > static_cast<int>(expr.size()))
+				break;
 			// while there is a valid operation, run executeOperation where it takes pops
 			// two numbers from the top of the stack and execute the operation
 			while (expr[i] && _op.find(expr[i]) != std::string::npos) {
@@ -96,6 +98,9 @@ void RPN::executeOperation( const char& op ) {
 	} else if (op == '-') {
 		res = num1 - num2;
 	} else if (op == '/') {
+		if (num2 == 0) {
+			throw divisionByZero();
+		}
 		res = num1 / num2;
 	} else if (op == '*') {
 		res = num1 * num2;
@@ -114,6 +119,10 @@ const char* RPN::invalidExpressionFormat::what() const throw() {
 
 const char* RPN::invalidExpressionOrder::what() const throw() {
 	return "Error: expression order, please check if your expression is valid";
+}
+
+const char* RPN::divisionByZero::what() const throw() {
+	return "Error: division by zero";
 }
 
 

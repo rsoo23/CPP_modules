@@ -35,6 +35,11 @@ class RPN {
 				const char* what() const throw();
 		};
 
+		class divisionByZero: public std::exception {
+			public:
+				const char* what() const throw();
+		};
+
     private:
 		std::stack<int> _stack;
 		std::string _op;
