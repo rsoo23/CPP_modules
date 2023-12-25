@@ -33,6 +33,8 @@ class PmergeMe {
         template <typename T, typename P>
         void sortIntoMainChain( T& container, P& pairs, int unpairedRemainder );
 
+        int getJacobsthalNum( int index );
+
         // time
         void startClock();
         void stopClock();

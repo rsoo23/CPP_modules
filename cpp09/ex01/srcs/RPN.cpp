@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:16:28 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/12 15:02:40 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/25 14:28:01 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,3 @@ const char* RPN::invalidExpressionOrder::what() const throw() {
 const char* RPN::divisionByZero::what() const throw() {
 	return "Error: division by zero";
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:43:21 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/12 00:33:25 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/25 17:40:36 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void PmergeMe::fordJohnsonAlgorithmLst() {
     // store all the values in a vector of pairs
 	std::list< std::pair<int, int> > pairs;
 	getPairs(pairs, _lst);
-	std::cout << std::endl << "Grouped Pairs: " << std::endl;
-	printPairs(pairs);
+	// std::cout << std::endl << "Grouped Pairs: " << std::endl;
+	// printPairs(pairs);
 
     // sort pairs based on second value in the pair
 	sortPairs(pairs);
-	std::cout << std::endl << "Sorted Pairs: " << std::endl;
-	printPairs(pairs);
+	// std::cout << std::endl << "Sorted Pairs: " << std::endl;
+	// printPairs(pairs);
 
     // split the pairs into two vectors: first values -> pend, second values -> main chain (_vec)
 	sortIntoMainChain(_lst, pairs, unpairedRemainder);
@@ -129,19 +129,49 @@ void PmergeMe::sortIntoMainChain( T& container, P& pairs, int unpairedRemainder 
 		container.push_back(it->second);
 		it++;
 	}
-	// add the unpairedRemainder to pend if it exists
-	if (unpairedRemainder != -1) {
-		pend.push_back(unpairedRemainder);
-	}
-	// printContainerElements(pend, "pend");
-	// printContainerElements(container, "container");
+	// insert the first element of pend into the front of the main chain since it is always smaller
+	container.insert(container.begin(), pend.front());
+	pend.erase(pend.begin());
 	
-	// insert values from pend one by one into the main chain (container) by using lower_bound
+	// printContainerElements(pend, "pend");
+	// printContainerElements(container, "main");
+
+	// insert values from pend one by one into the main chain based on the Jacobsthal sequence - 1
+	// assign the value -1 to inserted number in pend once it is inserted into main chain
+	int i = 2;
+	while (true) {
+		typename T::iterator pend_it = pend.begin();
+		int n = getJacobsthalNum(i++) - 1;
+
+		if (n >= static_cast<int>(pend.size())) {
+			break;
+		};
+		std::advance(pend_it, n);
+		container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
+		*pend_it = -1;
+	}
+
+	// insert the remaining numbers from pend into the main chain
 	typename T::iterator pend_it = pend.begin();
 	while (pend_it != pend.end()) {
-		container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
+		if (*pend_it != -1) {
+			container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
+		}
 		pend_it++;
 	}
+
+	// insert the unpairedRemainder into the correct position in the main chain
+	if (unpairedRemainder != -1) {
+		container.insert(std::lower_bound(container.begin(), container.end(), unpairedRemainder), unpairedRemainder);
+	}
+}
+
+int PmergeMe::getJacobsthalNum( int index ) {
+	if (index == 0)
+		return 0;
+	if (index == 1)
+		return 1;
+	return (getJacobsthalNum(index - 1) + getJacobsthalNum(index - 2) * 2);
 }
 
 // time
