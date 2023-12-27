@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:43:21 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/27 10:00:58 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/27 10:59:08 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,20 +164,28 @@ void PmergeMe::sortIntoMainChain( T& container, P& pairs, int unpairedRemainder 
 	
 	// printContainerElements(pend, "pend");
 	// printContainerElements(container, "main");
+	// std::cout << std::endl;
 
-	// insert values from pend one by one into the main chain based on the Jacobsthal sequence - 1
-	// assign the value -1 to inserted number in pend once it is inserted into main chain
-	int i = 2;
+	// insert values from pend one by one into the main chain based on the Jacobsthal sequence (index with [])
+	// b1, [b3], b2, [b5], b4, [b11], b10, b9, b8, b7, b6, ...
+	// - b1 is inserted above, then the we will move to the next index based on the Jacobsthal number, then insert decrementally into the main chain
+	// - if the Jacobsthal number index 11 doesn't exist and only has elements up until b7, it will be left to be inserted normally later on
+	int i = 3;
 	while (true) {
 		typename T::iterator pend_it = pend.begin();
-		int n = getJacobsthalNum(i++) - 1;
+		int n = getJacobsthalNum(i++) - 2;
 
 		if (n >= static_cast<int>(pend.size())) {
 			break;
 		};
 		std::advance(pend_it, n);
-		container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
-		*pend_it = -1;
+		while (n > -1 && *pend_it != -1) {
+			// std::cout << "n: " << n << ", Inserting: " << *pend_it << std::endl;
+			container.insert(std::lower_bound(container.begin(), container.end(), *pend_it), *pend_it);
+			*pend_it = -1;
+			pend_it--;
+			n--;
+		}
 	}
 
 	// insert the remaining numbers from pend into the main chain
@@ -191,6 +199,7 @@ void PmergeMe::sortIntoMainChain( T& container, P& pairs, int unpairedRemainder 
 
 	// insert the unpairedRemainder into the correct position in the main chain
 	if (unpairedRemainder != -1) {
+		// std::cout << "Inserting unpairedRemainder: " << unpairedRemainder << std::endl;
 		container.insert(std::lower_bound(container.begin(), container.end(), unpairedRemainder), unpairedRemainder);
 	}
 }
