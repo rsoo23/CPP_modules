@@ -28,8 +28,11 @@ class PmergeMe {
         void getPairs( P& pairs, const T& container );
 
         template <typename P>
-        void sortPairs( P& pairs );
+        void mergeSortPairs( P& pairs );
 
+		template <typename P>
+        void mergePairs( P& left, P& right, P& res );
+        
         template <typename T, typename P>
         void sortIntoMainChain( T& container, P& pairs, int unpairedRemainder );
 

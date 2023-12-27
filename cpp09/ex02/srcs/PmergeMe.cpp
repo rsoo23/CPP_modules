@@ -6,7 +6,7 @@
 /*   By: rsoo <rsoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:43:21 by rsoo              #+#    #+#             */
-/*   Updated: 2023/12/25 17:40:36 by rsoo             ###   ########.fr       */
+/*   Updated: 2023/12/27 10:00:58 by rsoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void PmergeMe::fordJohnsonAlgorithmVec() {
     // store all the values in a vector of pairs
 	std::vector< std::pair<int, int> > pairs;
 	getPairs(pairs, _vec);
-	// std::cout << std::endl << "Grouped Pairs: " << std::endl;
-	// printPairs(pairs);
+	std::cout << std::endl << "Grouped Pairs: " << std::endl;
+	printPairs(pairs);
 
     // sort pairs based on second value in the pair
-	sortPairs(pairs);
-	// std::cout << std::endl << "Sorted Pairs: " << std::endl;
-	// printPairs(pairs);
+	mergeSortPairs(pairs);
+	std::cout << std::endl << "Sorted Pairs: " << std::endl;
+	printPairs(pairs);
 
     // split the pairs into two vectors: first values -> pend, second values -> main chain (_vec)
 	sortIntoMainChain(_vec, pairs, unpairedRemainder);
@@ -65,7 +65,7 @@ void PmergeMe::fordJohnsonAlgorithmLst() {
 	// printPairs(pairs);
 
     // sort pairs based on second value in the pair
-	sortPairs(pairs);
+	mergeSortPairs(pairs);
 	// std::cout << std::endl << "Sorted Pairs: " << std::endl;
 	// printPairs(pairs);
 
@@ -95,24 +95,53 @@ void PmergeMe::getPairs( P& pairs, const T& container ) {
 }
 
 template <typename P>
-void PmergeMe::sortPairs( P& pairs ) {
-	typename P::iterator curr = pairs.begin();
-	typename P::iterator temp1;
-	typename P::iterator temp2;
+void PmergeMe::mergeSortPairs( P& pairs ) {
+	if (pairs.size() <= 1)
+		return;
 
-	curr++;
-	while (curr != pairs.end()) {
-		temp1 = curr;
-		temp2 = temp1;
-		temp2--;
-		while (temp2->second > temp1->second) {
-			std::iter_swap(temp2, temp1);
-			temp1--;
-			if (temp1 == pairs.begin())
-				break;
-			temp2--;
+	typename P::iterator mid = pairs.begin();
+	std::advance(mid, pairs.size() / 2);
+	
+	P left(pairs.begin(), mid);
+	// std::cout << std::endl << "Left: " << std::endl;
+	// printPairs(left);
+	P right(mid, pairs.end());
+	// std::cout << std::endl << "Right: " << std::endl;
+	// printPairs(right);
+
+	mergeSortPairs(left);
+	mergeSortPairs(right);
+	
+	pairs.clear();
+	mergePairs(left, right, pairs);
+	// std::cout << std::endl << "Subarray: " << std::endl;
+	// printPairs(pairs);
+}
+
+template <typename P>
+void PmergeMe::mergePairs( P& left, P& right, P& res ) {
+	typename P::iterator leftIt = left.begin();
+	typename P::iterator rightIt = right.begin();
+
+	// compares values and inserts the smaller values first into res
+	while (leftIt != left.end() && rightIt != right.end()) {
+		if ((*leftIt).second < (*rightIt).second) {
+			res.push_back(*leftIt);
+			leftIt++;
+		} else {
+			res.push_back(*rightIt);
+			rightIt++;
 		}
-		curr++;
+	}
+
+	// insert the remainding values into res
+	while (leftIt != left.end()) {
+		res.push_back(*leftIt);
+		leftIt++;
+	}
+	while (rightIt != right.end()) {
+		res.push_back(*rightIt);
+		rightIt++;
 	}
 }
 
